@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::group(['prefix'=>'merchant'],function(){
+	Route::get("/","merchant\IndexController@index");
+});
+Route::group(['prefix'=>'admin'],function(){
+	Route::get("/","admin\IndexController@index");
+});
