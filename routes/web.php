@@ -32,7 +32,6 @@ Route::group(['prefix'=>'merchant'],function(){
 
 
 
-
 });
 Route::group(['prefix'=>'admin'],function(){
 	Route::get("/","admin\IndexController@index");
@@ -159,6 +158,16 @@ Route::group(['prefix'=>'admin'],function(){
         Route::get("/upd/{id}","admin\NewsController@upd");
         Route::post("/upd/do","admin\NewsController@updo");
     });
+
+
+
+
+
+
+
+	Route::group(['prefix'=>'admin'],function(){
+		Route::get("create","admin\AdminController@create");
+	});
 });
 
 Route::group(['prefix'=>'/'],function(){
