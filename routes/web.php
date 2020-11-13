@@ -22,3 +22,11 @@ Route::group(['prefix'=>'merchant'],function(){
 Route::group(['prefix'=>'admin'],function(){
 	Route::get("/","admin\IndexController@index");
 });
+
+
+Route::group(['prefix'=>'/'],function(){
+	Route::group(['prefix'=>'chat'],function(){
+		Route::get("chat","index\ChatController@chat");
+		Route::get("user","index\ChatController@user");
+	});
+});
