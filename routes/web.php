@@ -129,7 +129,6 @@ Route::group(['prefix'=>'admin'],function(){
 
 });
 
-
 Route::group(['prefix'=>'/'],function(){
 	Route::group(['prefix'=>'chat'],function(){
 		Route::get("chat","index\ChatController@chat");

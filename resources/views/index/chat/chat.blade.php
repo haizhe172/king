@@ -139,14 +139,6 @@
             }
         }
     }) ;
-
-function test(){ 
-
-     var $objTr = $(".pnl-text"); //找到要定位的地方 tr 
-     var objTr = $objTr[0]; //转化为dom对象 
-     //alert(objTr.offsetTop);
-      $('body').animate({scrollTop:objTr.offsetTop},"slow"); //定位tr 
- } 
 function isJSON(str) {
     if (typeof str == 'string') {
         try {
