@@ -1,5 +1,4 @@
-@extends('layout.admin.layout')
-@section('title',"商家")
+@extends('layout.merchant.layout')
 @section('content')
 <body class="hold-transition skin-blue sidebar-mini">
             <section class="content-header">

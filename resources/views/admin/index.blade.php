@@ -1,5 +1,4 @@
 @extends('layout.admin.layout')
-@section('title',"运维")
 @section('content')
 <body class="hold-transition skin-blue sidebar-mini">
             <section class="content-header">

@@ -5,7 +5,7 @@
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>运维后台管理</title>
+    <title>商家后台管理系统</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <link rel="stylesheet" href="/admin/plugins/bootstrap/css/bootstrap.min.css">
@@ -15,27 +15,9 @@
     
     <script src="/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="/admin/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- 品牌 -->
+  
     <script src="/admin/plugins/adminLTE/js/app.min.js"></script>
-    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/plugins/adminLTE/css/AdminLTE.css">
-    <link rel="stylesheet" href="/plugins/adminLTE/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-	<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/plugins/kindeditor/themes/default/default.css" />
-	<script charset="utf-8" src="/plugins/kindeditor/kindeditor-min.js"></script>
-	<script charset="utf-8" src="/plugins/kindeditor/lang/zh_CN.js"></script>
-    <!-- 品牌 -->
-
-    <!-- 富文本编辑器 -->
-	<link rel="stylesheet" href="/plugins/kindeditor/themes/default/default.css" />
-	<script charset="utf-8" src="/plugins/kindeditor/kindeditor-min.js"></script>
-	<script charset="utf-8" src="/plugins/kindeditor/lang/zh_CN.js"></script>
-
-
-
+    
     <script type="text/javascript">   
          function SetIFrameHeight(){
               var iframeid=document.getElementById("iframe"); //iframe id
@@ -59,7 +41,7 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>品优购</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>后台管理系统</b></span>
+                <span class="logo-lg"><b>商家后台管理</b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -360,20 +342,15 @@
                         <ul class="treeview-menu">
                 
                             <li id="admin-login">
-                                <a href="{{url('/admin/brand/create')}}" target="iframe">
-                                    <i class="fa fa-circle-o"></i>品牌添加
+                                <a href="brand.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i>品牌管理
                                 </a>
                             </li>
                             <li id="admin-login">
                                 <a href="specification.html" target="iframe">
                                     <i class="fa fa-circle-o"></i>规格管理
                                 </a>
-                            </li>  
-                            <li id="admin-login">
-                                <a href="brand.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>商品管理
-                                </a>
-                            </li>                         
+                            </li>                           
                             <li id="admin-login">
                                 <a href="type_template.html" target="iframe">
                                     <i class="fa fa-circle-o"></i>模板管理
@@ -391,7 +368,7 @@
                             </li>
                         </ul>                        
                     </li>
-                    sclect
+                    
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-folder"></i> 
