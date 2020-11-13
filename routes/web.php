@@ -154,8 +154,28 @@ Route::group(['prefix'=>'admin'],function(){
 
 
 
+	//管理员
 	Route::group(['prefix'=>'admin'],function(){
 		Route::get("create","admin\AdminController@create");
+		Route::post("store","admin\AdminController@store");
+		Route::get("ajaxuniq","admin\AdminController@ajaxuniq");
+		Route::get("index","admin\AdminController@index");
+		Route::get("ajaxNames","admin\AdminController@ajaxNames");
+		Route::get("upd","admin\AdminController@upd");
+		Route::any("updDo","admin\AdminController@updDo");
+		Route::any("del","admin\AdminController@del");
+	});
+
+	//角色
+	Route::group(['prefix'=>'role'],function(){
+		Route::get("create","admin\RoleController@create");
+		Route::post("store","admin\RoleController@store");
+		Route::get("ajaxuniq","admin\RoleController@ajaxuniq");
+		Route::get("index","admin\RoleController@index");
+		Route::get("ajaxNames","admin\RoleController@ajaxNames");
+		Route::get("upd","admin\RoleController@upd");
+		Route::any("updDo","admin\RoleController@updDo");
+		Route::any("del","admin\RoleController@del");
 	});
 });
 

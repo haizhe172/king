@@ -41,7 +41,7 @@
                         <!--tab头-->
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a href="#home" data-toggle="tab">管理员信息</a>
+                                <a href="#home" data-toggle="tab">角色信息</a>
                             </li>
                         </ul>
                         <!--tab头/-->
@@ -53,19 +53,20 @@
                             <div class="tab-pane active" id="home">
                                 <div class="row data-type">
 
-		                           <div class="col-md-2 title">管理员名称</div>
+		                           <div class="col-md-2 title">角色名称</div>
 		                           <div class="col-md-10 data">
-		                               <input type="text" class="form-control" name="admin_name" id="admin_name"   placeholder="管理员名称" value="">
+		                               <input type="text" class="form-control" role_id="{{$role->role_id}}" name="role_name" id="role_name"   placeholder="角色名称" value="{{$role->role_name}}">
 		                           </div>
                                        <b><span id="span_name" style="color: red; font-size: 16px; margin-left: 220px;"></span></b>
                                 </div>
+                                
                                 <div class="row data-type">
 
-                                   <div class="col-md-2 title">管理员密码</div>
-                                   <div class="col-md-10 data">
-                                       <input type="password" class="form-control" name="admin_pwd" id="admin_pwd"  placeholder="管理员密码" value="">
-                                   </div>
-                                       <b><span id="span_pwd" style="color: red; font-size: 16px; margin-left: 220px;"></span></b>
+		                           <div class="col-md-2 title" style="height:70px;">角色介绍</div>
+		                           <div class="col-md-10 data">
+		                               <textarea type="text" class="form-control" name="role_desc" id="role_desc"   placeholder="劫色介绍" style="height:70px;">{{$role->role_desc}}</textarea>
+		                           </div>
+                                       <b><span id="span_name" style="color: red; font-size: 16px; margin-left: 220px;"></span></b>
                                 </div>
                             </div>
 
@@ -99,24 +100,26 @@
 <script>
     $(function(){
         // alert("123");
-        //管理员名称
-        $(document).on("blur","#admin_name",function(){
+        //角色名称
+        $(document).on("blur","#role_name",function(){
             // alert(123);
-            var admin_name = $(this).val();
-            // alert(admin_name);
-            if(admin_name==""){
-                $("#span_name").text("管理员名称不能为空");
+            var role_name = $(this).val();
+            var role_id = $(this).attr("role_id");
+            // alert(role_name);
+            if(role_name==""){
+                $("#span_name").text("角色名称不能为空");
             }else{
                 $.ajax({
-                    url: "/admin/admin/ajaxuniq",
+                    url: "/admin/role/ajaxuniq",
                     type: "get",
                     data: {
-                        admin_name:admin_name
+                        role_name:role_name,
+                        role_id:role_id
                     },
                     success: function(res) {
                         // console.log(res);
                         if (res == 'no') {
-                            $("#span_name").text("管理员名称已存在");
+                            $("#span_name").text("角色名称已存在");
                         } else {
                             $("#span_name").html("<font color='green'>√</font>");
                         }
@@ -124,46 +127,33 @@
                 })
             }
         })
-
-        //管理员密码验证
-        $(document).on("blur","#admin_pwd",function(){
-            // alert(123);
-            var admin_pwd = $(this).val();
-            var pwd = /^\w{6,}$/;
-            // alert(admin_pwd);
-            if(admin_pwd==""){
-                $("#span_pwd").text("管理员密码不能为空");
-            }else if(!pwd.test(admin_pwd)){
-                $("#span_pwd").text("管理员密码格式不正确");
-            }else{
-                $("#span_pwd").html("<font color='green'>√</font>");
-            }
-        })
-
-        //管理员阻止提交
+        //角色阻止提交
         $(document).on("click","#but",function(){
             // alert(12);
             var nameflag = true;
-            //阻止管理员名称
-            var admin_name = $("#admin_name").val();
-            // alert(admin_name);
-            if(admin_name==""){
-                $("#span_name").text("管理员名称不能为空");
+            //阻止角色名称
+            var role_name = $("#role_name").val();
+            var role_id = $("#role_name").attr("role_id");
+            var role_desc = $("#role_desc").val();
+            // alert(role_name);
+            if(role_name==""){
+                $("#span_name").text("角色名称不能为空");
                 return false;
             }else{
                 // alert(123);
                 $.ajax({
-                    url: "/admin/admin/ajaxuniq",
+                    url: "/admin/role/ajaxuniq",
                     type: "get",
                     sync:false,
                     data: {
-                        admin_name:admin_name
+                        role_name:role_name,
+                        role_id:role_id
                     },
                     success: function(res) {
                         // alert(123);
                         // console.log(res);
                         if (res == 'no') {
-                            $("#span_name").text("管理员名称已存在");
+                            $("#span_name").text("角色名称已存在");
                             return  false;
                         }
                     }
@@ -172,24 +162,15 @@
                     return false;
                 }
             }
-            //阻止管理员密码
-            var admin_pwd = $("#admin_pwd").val();
-            var pwd = /^\w{6,}$/;
-            // alert(admin_pwd);
-            if(admin_pwd==""){
-                $("#span_pwd").text("管理员密码不能为空");
-                return false;
-            }else if(!pwd.test(admin_pwd)){
-                $("#span_pwd").text("管理员密码格式不正确");
-                return false;
-            }else{
+            
                 $.ajax({
-                    url: "/admin/admin/store",
+                    url: "/admin/role/updDo",
                     type: "post",
                     sync:false,
                     data: {
-                        admin_name:admin_name,
-                        admin_pwd:admin_pwd
+                        role_name:role_name,
+                        role_id:role_id,
+                        role_desc:role_desc
                     },
                     dataType:"json",
                     success: function(res) {
@@ -204,7 +185,7 @@
 
                     }
                 })
-            }
+            
         })
     })
 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});

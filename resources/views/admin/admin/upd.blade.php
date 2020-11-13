@@ -55,7 +55,7 @@
 
 		                           <div class="col-md-2 title">管理员名称</div>
 		                           <div class="col-md-10 data">
-		                               <input type="text" class="form-control" name="admin_name" id="admin_name"   placeholder="管理员名称" value="">
+		                               <input type="text" class="form-control" admin_id="{{$admin->admin_id}}" name="admin_name" id="admin_name"   placeholder="管理员名称" value="{{$admin->admin_name}}">
 		                           </div>
                                        <b><span id="span_name" style="color: red; font-size: 16px; margin-left: 220px;"></span></b>
                                 </div>
@@ -63,7 +63,7 @@
 
                                    <div class="col-md-2 title">管理员密码</div>
                                    <div class="col-md-10 data">
-                                       <input type="password" class="form-control" name="admin_pwd" id="admin_pwd"  placeholder="管理员密码" value="">
+                                       <input type="password" class="form-control" name="admin_pwd" id="admin_pwd"  placeholder="管理员密码" value="{{$admin->admin_pwd}}">
                                    </div>
                                        <b><span id="span_pwd" style="color: red; font-size: 16px; margin-left: 220px;"></span></b>
                                 </div>
@@ -103,6 +103,7 @@
         $(document).on("blur","#admin_name",function(){
             // alert(123);
             var admin_name = $(this).val();
+            var admin_id = $(this).attr("admin_id");
             // alert(admin_name);
             if(admin_name==""){
                 $("#span_name").text("管理员名称不能为空");
@@ -111,7 +112,8 @@
                     url: "/admin/admin/ajaxuniq",
                     type: "get",
                     data: {
-                        admin_name:admin_name
+                        admin_name:admin_name,
+                        admin_id:admin_id
                     },
                     success: function(res) {
                         // console.log(res);
@@ -146,6 +148,7 @@
             var nameflag = true;
             //阻止管理员名称
             var admin_name = $("#admin_name").val();
+            var admin_id = $("#admin_name").attr("admin_id");
             // alert(admin_name);
             if(admin_name==""){
                 $("#span_name").text("管理员名称不能为空");
@@ -157,7 +160,8 @@
                     type: "get",
                     sync:false,
                     data: {
-                        admin_name:admin_name
+                        admin_name:admin_name,
+                        admin_id:admin_id
                     },
                     success: function(res) {
                         // alert(123);
@@ -184,12 +188,13 @@
                 return false;
             }else{
                 $.ajax({
-                    url: "/admin/admin/store",
+                    url: "/admin/admin/updDo",
                     type: "post",
                     sync:false,
                     data: {
                         admin_name:admin_name,
-                        admin_pwd:admin_pwd
+                        admin_pwd:admin_pwd,
+                        admin_id:admin_id
                     },
                     dataType:"json",
                     success: function(res) {
