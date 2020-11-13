@@ -15,9 +15,27 @@
     
     <script src="/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="/admin/plugins/bootstrap/js/bootstrap.min.js"></script>
-  
+
+    <!-- 品牌 -->
     <script src="/admin/plugins/adminLTE/js/app.min.js"></script>
-    
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="/plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+	<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/plugins/kindeditor/themes/default/default.css" />
+	<script charset="utf-8" src="/plugins/kindeditor/kindeditor-min.js"></script>
+	<script charset="utf-8" src="/plugins/kindeditor/lang/zh_CN.js"></script>
+    <!-- 品牌 -->
+
+    <!-- 富文本编辑器 -->
+	<link rel="stylesheet" href="/plugins/kindeditor/themes/default/default.css" />
+	<script charset="utf-8" src="/plugins/kindeditor/kindeditor-min.js"></script>
+	<script charset="utf-8" src="/plugins/kindeditor/lang/zh_CN.js"></script>
+
+
+
     <script type="text/javascript">   
          function SetIFrameHeight(){
               var iframeid=document.getElementById("iframe"); //iframe id
@@ -342,15 +360,20 @@
                         <ul class="treeview-menu">
                 
                             <li id="admin-login">
-                                <a href="brand.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>品牌管理
+                                <a href="{{url('/admin/brand/create')}}" target="iframe">
+                                    <i class="fa fa-circle-o"></i>品牌添加
                                 </a>
                             </li>
                             <li id="admin-login">
                                 <a href="specification.html" target="iframe">
                                     <i class="fa fa-circle-o"></i>规格管理
                                 </a>
-                            </li>                           
+                            </li>  
+                            <li id="admin-login">
+                                <a href="brand.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i>商品管理
+                                </a>
+                            </li>                         
                             <li id="admin-login">
                                 <a href="type_template.html" target="iframe">
                                     <i class="fa fa-circle-o"></i>模板管理
@@ -368,7 +391,7 @@
                             </li>
                         </ul>                        
                     </li>
-                    
+                    sclect
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-folder"></i> 

@@ -20,7 +20,74 @@ Route::group(['prefix'=>'merchant'],function(){
 	Route::get("/","merchant\IndexController@index");
 });
 Route::group(['prefix'=>'admin'],function(){
-	Route::get("/","admin\IndexController@index");
+    Route::get("/","admin\IndexController@index");
+    //品牌
+    Route::group(['prefix'=>'brand'],function(){
+        Route::get("create","admin\BrandController@create");
+
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 });
 
 
