@@ -1,5 +1,3 @@
-@extends('layout.admin.layout')
-@section('content')
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
@@ -190,4 +188,3 @@ $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('conten
 </html>
 
 </html>
-@endsection

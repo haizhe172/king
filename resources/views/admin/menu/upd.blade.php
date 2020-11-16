@@ -1,4 +1,3 @@
-
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
@@ -40,7 +39,7 @@
                         <!--tab头-->
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a href="#home" data-toggle="tab">管理员信息</a>
+                                <a href="#home" data-toggle="tab">权限信息</a>
                             </li>
                         </ul>
                         <!--tab头/-->
@@ -52,19 +51,46 @@
                             <div class="tab-pane active" id="home">
                                 <div class="row data-type">
 
-		                           <div class="col-md-2 title">管理员名称</div>
+		                           <div class="col-md-2 title">权限名称</div>
 		                           <div class="col-md-10 data">
-		                               <input type="text" class="form-control" name="admin_name" id="admin_name"   placeholder="管理员名称" value="">
+		                               <input type="text" class="form-control" name="menu_name" id="menu_name" menu_id="{{$res->menu_id}}"   placeholder="权限名称" value="{{$res->menu_name}}">
+		                           </div>
+                                       <b><span id="span_name" style="color: red; font-size: 16px; margin-left: 220px;"></span></b>
+                                </div>
+                                
+                                <div class="row data-type">
+
+		                           <div class="col-md-2 title">权限路由</div>
+		                           <div class="col-md-10 data">
+		                               <input type="text" class="form-control" name="menu_url" id="menu_url"   placeholder="权限路由" value="{{$res->menu_url}}">
 		                           </div>
                                        <b><span id="span_name" style="color: red; font-size: 16px; margin-left: 220px;"></span></b>
                                 </div>
                                 <div class="row data-type">
 
-                                   <div class="col-md-2 title">管理员密码</div>
-                                   <div class="col-md-10 data">
-                                       <input type="password" class="form-control" name="admin_pwd" id="admin_pwd"  placeholder="管理员密码" value="">
-                                   </div>
-                                       <b><span id="span_pwd" style="color: red; font-size: 16px; margin-left: 220px;"></span></b>
+		                           <div class="col-md-2 title">权限别名</div>
+		                           <div class="col-md-10 data">
+		                               <input type="text" class="form-control" name="menu_as" id="menu_as"   placeholder="权限别名" value="{{$res->menu_as}}">
+		                           </div>
+                                       <b><span id="span_name" style="color: red; font-size: 16px; margin-left: 220px;"></span></b>
+                                </div>
+                                <div class="row data-type">
+                                <div class="col-md-2 title">是否显示</div>
+                                <div class="col-md-10 data">
+                                   <input type="radio" name="is_show" value="1" {{$res->is_show=="1" ? "checked" : ""}}>是
+                                   <input type="radio" name="is_show" value="0" {{$res->is_show=="0" ? "checked" : ""}}>否
+                                </div>
+                                </div>
+                                <div class="row data-type">
+                                <div class="col-md-2 title">所属模块</div>
+                                <div class="col-md-10 data">
+                                   <select class="form-control" name="p_id" id="p_id">
+                                       <option value="0">--顶级分类--</option>
+                                       @foreach($menu as $v)
+                                       <option value="{{$v->menu_id}}" {{$res->p_id==$v->menu_id ? "selected" : ""}}>{{str_repeat("|——",$v->level)}}{{$v->menu_name}}</option>
+                                       @endforeach
+                                   </select>
+                                </div>
                                 </div>
                             </div>
 
@@ -98,24 +124,26 @@
 <script>
     $(function(){
         // alert("123");
-        //管理员名称
-        $(document).on("blur","#admin_name",function(){
+        //权限名称
+        $(document).on("blur","#menu_name",function(){
             // alert(123);
-            var admin_name = $(this).val();
-            // alert(admin_name);
-            if(admin_name==""){
-                $("#span_name").text("管理员名称不能为空");
+            var menu_name = $(this).val();
+            var menu_id = $(this).attr("menu_id");
+            // alert(menu_name);
+            if(menu_name==""){
+                $("#span_name").text("权限名称不能为空");
             }else{
                 $.ajax({
-                    url: "/admin/admin/ajaxuniq",
+                    url: "/admin/menu/ajaxuniq",
                     type: "get",
                     data: {
-                        admin_name:admin_name
+                        menu_name:menu_name,
+                        menu_id:menu_id
                     },
                     success: function(res) {
                         // console.log(res);
                         if (res == 'no') {
-                            $("#span_name").text("管理员名称已存在");
+                            $("#span_name").text("权限名称已存在");
                         } else {
                             $("#span_name").html("<font color='green'>√</font>");
                         }
@@ -124,45 +152,36 @@
             }
         })
 
-        //管理员密码验证
-        $(document).on("blur","#admin_pwd",function(){
-            // alert(123);
-            var admin_pwd = $(this).val();
-            var pwd = /^\w{6,}$/;
-            // alert(admin_pwd);
-            if(admin_pwd==""){
-                $("#span_pwd").text("管理员密码不能为空");
-            }else if(!pwd.test(admin_pwd)){
-                $("#span_pwd").text("管理员密码格式不正确");
-            }else{
-                $("#span_pwd").html("<font color='green'>√</font>");
-            }
-        })
-
-        //管理员阻止提交
+        //权限阻止提交
         $(document).on("click","#but",function(){
             // alert(12);
             var nameflag = true;
-            //阻止管理员名称
-            var admin_name = $("#admin_name").val();
-            // alert(admin_name);
-            if(admin_name==""){
-                $("#span_name").text("管理员名称不能为空");
+            //阻止权限名称
+            var menu_name = $("#menu_name").val();
+            var menu_url = $("#menu_url").val();
+            var menu_as = $("#menu_as").val();
+            var is_show = $("input[name='is_show']:checked").val();
+            var p_id = $("#p_id option:selected").val();
+            var menu_id = $("#menu_name").attr("menu_id");
+            // alert(menu_name);
+            if(menu_name==""){
+                $("#span_name").text("权限名称不能为空");
                 return false;
             }else{
                 // alert(123);
                 $.ajax({
-                    url: "/admin/admin/ajaxuniq",
+                    url: "/admin/menu/ajaxuniq",
                     type: "get",
                     sync:false,
                     data: {
-                        admin_name:admin_name
+                        menu_name:menu_name,
+                        menu_id:menu_id
                     },
                     success: function(res) {
                         // alert(123);
                         // console.log(res);
                         if (res == 'no') {
-                            $("#span_name").text("管理员名称已存在");
+                            $("#span_name").text("权限名称已存在");
                             return  false;
                         }
                     }
@@ -171,29 +190,22 @@
                     return false;
                 }
             }
-            //阻止管理员密码
-            var admin_pwd = $("#admin_pwd").val();
-            var pwd = /^\w{6,}$/;
-            // alert(admin_pwd);
-            if(admin_pwd==""){
-                $("#span_pwd").text("管理员密码不能为空");
-                return false;
-            }else if(!pwd.test(admin_pwd)){
-                $("#span_pwd").text("管理员密码格式不正确");
-                return false;
-            }else{
                 $.ajax({
-                    url: "/admin/admin/store",
+                    url: "/admin/menu/updDo",
                     type: "post",
                     sync:false,
                     data: {
-                        admin_name:admin_name,
-                        admin_pwd:admin_pwd
+                        menu_name:menu_name,
+                        menu_url:menu_url,
+                        menu_as:menu_as,
+                        is_show:is_show,
+                        p_id:p_id,
+                        menu_id:menu_id
                     },
                     dataType:"json",
                     success: function(res) {
                         // alert(123);
-                        console.log(res);
+                        // console.log(res);
                         if(res.status=="true"){
                             alert(res.msg);
                             window.location.href=res.result;
@@ -203,7 +215,7 @@
 
                     }
                 })
-            }
+            
         })
     })
 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});

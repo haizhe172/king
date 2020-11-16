@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Models\Admin;
+use App\Models\Admin_role;
 
 class RoleController extends Controller
 {
@@ -86,11 +88,11 @@ class RoleController extends Controller
         $arr = request()->all();
         // dd($arr);
         if(empty($arr["role_name"])){
-            return $this->datacode("false","00001","管理员名称不能为空");
+            return $this->datacode("false","00001","角色名称不能为空");
         }
         $role_name = Role::where("role_name",$arr["role_name"])->first();
         if($role_name){
-            return $this->datacode("false","00001","管理员名称已存在");
+            return $this->datacode("false","00001","角色名称已存在");
         }
         $arr["add_time"] = time();
         // dd($arr);
@@ -138,13 +140,13 @@ class RoleController extends Controller
         $arr = request()->all();
         // dd($arr);
         if(empty($arr["role_name"])){
-            return $this->datacode("false","00001","管理员名称不能为空");
+            return $this->datacode("false","00001","角色名称不能为空");
         }
-        $admin = Role::where("role_id",$arr["role_id"])->value("role_name");
-        if($admin!=$arr["role_name"]){
+        $role = Role::where("role_id",$arr["role_id"])->value("role_name");
+        if($role!=$arr["role_name"]){
             $isres = Role::where("role_name",$arr["role_name"])->first();
             if($isres){
-                return $this->datacode("false","00001","管理员名称已存在");
+                return $this->datacode("false","00001","角色名称已存在");
             }
         }else{
             return $this->datacode("true","00000","修改成功","/admin/role/index");
@@ -184,7 +186,48 @@ class RoleController extends Controller
             return redirect('/admin/role/index');
         }
     }
-    //管理员提示信息
+
+    //管理员赋角色
+    public function role(){
+        $admin_id = request()->get("id");
+        $admin_role = Admin_role::where(["admin_id"=>$admin_id,"is_del"=>1])->pluck("role_id");
+        $role_id = $admin_role ? $admin_role->toArray() : [];
+        $admin_name = Admin::where("admin_id",$admin_id)->value("admin_name");
+        $role = Role::where("role_status",1)->get();
+        return view("admin.role.role",compact("role","admin_name","admin_id","role_id"));
+
+    }
+
+    //赋权限执行
+    public function roleDo(){
+        $arr = request()->all();
+        $admin_id = Admin::where(["admin_id"=>$arr["admin_id"],"admin_status"=>1])->value("admin_id");
+        if($admin_id){
+            $role_id = explode(",",$arr["role_id"]);
+            if($role_id){
+                Admin_role::where("admin_id",$arr["admin_id"])->delete();
+                $add = [];
+                foreach($role_id as $k=>$v){
+                    $add[] = [
+                        "admin_id"=>$admin_id,
+                        "role_id"=>$v,
+                        "add_time"=>time()
+                    ];
+                }
+                // dd($add);
+                $res = Admin_role::insert($add);
+                if($res){
+                    return $this->datacode("true","00000","赋权成功");
+                }else{
+                    return $this->datacode("false","00001","赋权失败");
+                }
+            }else{
+                return $this->datacode("false","00001","请选择角色");
+            }
+        }
+    }
+
+    //角色提示信息
     public function datacode($status="",$code=1,$msg="",$result=""){
         $message = [];
         $message["status"] = $status;

@@ -141,7 +141,7 @@ class AdminController extends Controller
             return redirect('/admin/admin/index');
         }
     }
-
+    
     //管理员提示信息
     public function datacode($status="",$code=1,$msg="",$result=""){
         $message = [];

@@ -253,8 +253,7 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="/admin/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">测试用户</span>
+                                <span class="hidden-xs"><a href="" style="margin-top:-30px;">退出</a></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -295,7 +294,7 @@
                         <img src="/admin/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p> 测试用户</p>
+                        <p> {{session()->get("admin")["admin_name"]}}</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                     </div>
                 </div>
@@ -306,92 +305,35 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu"  >
                     <li class="header">菜单</li>
-                    <li id="admin-index"><a href="index.html"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
+                    <li id="admin-index"><a href="/admin"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
 
                     <!-- 菜单 -->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-folder"></i> 
-                            <span>商家管理</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                
-                            <li id="admin-login">
-                                <a href="seller_1.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>商家审核
-                                </a>
-                            </li>
-                            <li id="admin-login">
-                                <a href="seller.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>商家管理
-                                </a>
-                            </li>
-                        </ul>                        
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-folder"></i> 
-                            <span>商品管理</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                
-                            <li id="admin-login">
-                                <a href="brand.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>品牌管理
-                                </a>
-                            </li>
-                            <li id="admin-login">
-                                <a href="specification.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>规格管理
-                                </a>
-                            </li>                           
-                            <li id="admin-login">
-                                <a href="type_template.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>模板管理
-                                </a>
-                            </li>
-                            <li id="admin-login">
-                                <a href="item_cat.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>分类管理
-                                </a>
-                            </li>
-                            <li id="admin-login">
-                                <a href="goods.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>商品审核
-                                </a>
-                            </li>
-                        </ul>                        
-                    </li>
                     
-                    <li class="treeview">
-                        <a href="#">
+                    @php $name = Route::currentRouteName();@endphp
+                    @foreach($priv as $v)
+                    <li @if(strpos($name,$v->menu_as)!==false) class="treeview active" @else class="treeview" @endif>
+                        <a href="javascript:;">
                             <i class="fa fa-folder"></i> 
-                            <span>广告管理</span>
+                            <span>{{$v->menu_name}}</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
-                        <ul class="treeview-menu">
-                
-                            <li id="admin-login">
-                                <a href="content_category.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>广告类型管理
+                        
+                        @if($v->son)
+                        <ul @if(strpos($name,$v->menu_as)!==false) class="treeview-menu menu-open" style="display: block;" @else class="treeview-menu" style="display: none;" @endif>
+                        @foreach($v->son as $vv)
+                            <li id="admin-login" >
+                                <a href="{{$vv->menu_url}}"  target="iframe">
+                                    <i class="fa fa-circle-o"></i>{{$vv->menu_name}}
                                 </a>
                             </li>
-                            <li id="admin-login">
-                                <a href="content.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>广告管理
-                                </a>
-                            </li>
-                        </ul>                        
+                        @endforeach
+                        </ul>     
+                        @endif                   
                     </li>
-                    <!-- 菜单 /-->
+                    @endforeach
+                  
 
                 </ul>
             </section>
@@ -400,10 +342,14 @@
         <!-- 导航侧栏 /-->
 
         <!-- 内容区域 -->
-        <div class="content-wrapper" width="100%">
-        @yield('content')
+        <div class="content-wrapper">
+			<iframe width="100%" id="iframe" name="iframe"	onload="SetIFrameHeight()" 
+					frameborder="0" src="/admin"></iframe>
+ 
         </div>
         <!-- 内容区域 /-->
+
+       
 
         <!-- 底部导航 -->
         <footer class="main-footer">

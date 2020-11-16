@@ -20,7 +20,7 @@
   <!-- .box-body -->
 
                     <div class="box-header with-border">
-                        <h3 class="box-title">角色管理</h3>
+                        <h3 class="box-title">权限管理</h3>
                     </div>
 
                     <div class="box-body">
@@ -30,8 +30,8 @@
 
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
-                                    <form action="/admin/role/index">
-							                  角色名称：<input type="text" name="role_name" value="{{$role_name??''}}">
+                                    <form action="/admin/menu/index">
+							                  权限名称：<input type="text" name="menu_name" value="{{$menu_name??''}}">
 									<button type="submit" class="btn btn-default" >查询</button>
                                     </form>
                                 </div>
@@ -45,29 +45,41 @@
 			                              <th class="" style="padding-right:0px">
 			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
 			                              </th>
-										  <th class="sorting_asc">角色ID</th>
-									      <th class="sorting">角色名称</th>
+										  <th class="sorting_asc">权限ID</th>
+									      <th class="sorting">权限名称</th>
+									      <th class="sorting">权限路由</th>
+									      <th class="sorting">权限别名</th>
+									      <th class="sorting">是否显示</th>
 									      <th class="sorting">添加时间</th>
 					                      <th class="text-center">操作</th>
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-                                      @foreach($role as $itme)
+                                      @foreach($menu as $itme)
 			                          <tr>
-                                          <td><input  type="checkbox" class="che" value="{{$itme->role_id}}"></td>
-				                          <td>{{$itme->role_id}}</td>
-									      <td role_name="{{$itme->role_name}}" fined="role_name" id="{{$itme->role_id}}">
-                                            <span class="span_name">{{$itme->role_name}}</span>
+                                          <td><input  type="checkbox" class="che" value="{{$itme->menu_id}}"></td>
+				                          <td>{{$itme->menu_id}}</td>
+									      <td menu_name="{{$itme->menu_name}}" fined="menu_name" id="{{$itme->menu_id}}">
+                                            <span class="span_name">{{str_repeat("|——",$itme->level)}}{{$itme->menu_name}}</span>
                                           </td>
+
+									      <td menu_name="{{$itme->menu_url}}" fined="menu_url" id="{{$itme->menu_id}}">
+                                            <span class="span_name">{{$itme->menu_url}}</span>
+                                          </td>
+
+									      <td menu_name="{{$itme->menu_as}}" fined="menu_as" id="{{$itme->menu_id}}">
+                                            <span class="span_name">{{$itme->menu_as}}</span>
+                                          </td>
+
+                                          <td>{{$itme->is_show=="1" ? "√" : "×"}}</td>
+
 									      <td>{{date("Y-m-d H:i:s",$itme->add_time)}}</td>
 		                                  <td class="text-center">
-		                                 	  <a href="/admin/role/upd?id={{$itme->role_id}}" class="btn bg-olive btn-xs">修改</a>
-		                                 	  <a href="/admin/role/del?id={{$itme->role_id}}" class="btn bg-olive btn-xs">删除</a>
-											  <button class="btn btn-default" ng-click="goListPage()"><a href="/admin/menu/menu?id={{$itme->role_id}}">添加权限</a></button>
+		                                 	  <a href="/admin/menu/upd?id={{$itme->menu_id}}" class="btn bg-olive btn-xs">修改</a>
+		                                 	  <a href="/admin/menu/del?id={{$itme->menu_id}}" class="btn bg-olive btn-xs">删除</a>
 		                                   </td>
 			                          </tr>
                                       @endforeach
-                                      <tr><td colspan="7">{{$role->appends(["role_name"=>$role_name])->links()}}</td></tr>
 			                      </tbody>
 			                  </table>
 			                  <!--数据列表/-->
@@ -90,31 +102,32 @@
             var name = $(this).text();
             // console.log(name);
             $(this).parent().html('<input type="text" class="input_name" value='+name+'> <b><span id="span_names" style="color: red; font-size: 16px; margin-left: 220px;"></span></b>');
+            $(".input_name").focus();
         })
         $(document).on("blur",".input_name",function(){
             // alert("123");
             var obj = $(this);
             var new_name = $(this).val();
-            var role_name = $(this).parent().attr("role_name");
+            var menu_name = $(this).parent().attr("menu_name");
             var fined = $(this).parent().attr("fined");
             var id = $(this).parent().attr("id");
-            if(new_name==role_name){
-                 obj.parent().html('<span class="span_name">'+role_name+'</span>');
+            if(new_name==menu_name){
+                 obj.parent().html('<span class="span_name">'+menu_name+'</span>');
                  return false;
             }
             if(new_name==""){
-                 obj.parent().html('<span class="span_name">'+role_name+'</span>');
+                 obj.parent().html('<span class="span_name">'+menu_name+'</span>');
                  return false;
             }
 
             // console.log(data);
             if(new_name==""){
                 // alert("123");
-                $(this).next().children().text("角色名称不能为空");
+                $(this).next().children().text("权限名称不能为空");
                 return false;
             }else{
                 $.get(
-                    "/admin/role/ajaxNames",
+                    "/admin/menu/ajaxNames",
                     {new_name:new_name,fined:fined,id:id},
                     function(res){
                         // console.log(res);
@@ -148,17 +161,17 @@
                     alert('没有内容删除');
                     return false;
                 }
-                var role_id='';
+                var menu_id='';
                 box.each(function(){
-                    role_id+=$(this).val()+',';
+                    menu_id+=$(this).val()+',';
                 })
-                role_id=role_id.substr(0,role_id.length-1);
+                menu_id=menu_id.substr(0,menu_id.length-1);
 
                 if(window.confirm('是否确定删除？')){
 			$.ajax({
 				type:"get",
-				url:"/admin/role/del",
-				data:{id:role_id},
+				url:"/admin/menu/del",
+				data:{id:menu_id},
 				async:false,
 				dataType:"json",
 				success:function(res){
