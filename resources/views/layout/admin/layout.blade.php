@@ -380,13 +380,23 @@
                         <ul class="treeview-menu">
                 
                             <li id="admin-login">
-                                <a href="content_category.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>广告类型管理
+                                <a href="{{url('admin/position/create')}}" target="iframe">
+                                    <i class="fa fa-circle-o"></i>广告位添加
                                 </a>
                             </li>
                             <li id="admin-login">
-                                <a href="content.html" target="iframe">
-                                    <i class="fa fa-circle-o"></i>广告管理
+                                <a href="{{url('admin/position/index')}}" target="iframe">
+                                    <i class="fa fa-circle-o"></i>广告位列表
+                                </a>
+                            </li>
+                            <li id="admin-login">
+                                <a href="{{url('admin/ad/create')}}" target="iframe">
+                                    <i class="fa fa-circle-o"></i>广告添加
+                                </a>
+                            </li>
+                            <li id="admin-login">
+                                <a href="{{url('admin/ad/index')}}" target="iframe">
+                                    <i class="fa fa-circle-o"></i>广告列表
                                 </a>
                             </li>
                         </ul>                        
