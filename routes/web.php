@@ -208,5 +208,9 @@ Route::group(['prefix'=>'/'],function(){
 	Route::group(['prefix'=>'chat'],function(){
 		Route::get("chat","index\ChatController@chat");
 		Route::get("user","index\ChatController@user");
+		Route::any("init","index\ChatController@init");
+		Route::get("merchant","index\ChatController@merchant");
+		Route::any("say","index\ChatController@say");
+
 	});
 });
