@@ -6,10 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\GatewayClient' => $baseDir . '/app/Console/Commands/GatewayClient.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\admin\\IndexController' => $baseDir . '/app/Http/Controllers/admin/IndexController.php',
+    'App\\Http\\Controllers\\index\\ChatController' => $baseDir . '/app/Http/Controllers/index/ChatController.php',
     'App\\Http\\Controllers\\merchant\\IndexController' => $baseDir . '/app/Http/Controllers/merchant/IndexController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
@@ -20,6 +22,10 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\Admin_user' => $baseDir . '/app/Models/Admin_user.php',
+    'App\\Models\\Merchant' => $baseDir . '/app/Models/Merchant.php',
+    'App\\Models\\Merchant_user' => $baseDir . '/app/Models/Merchant_user.php',
+    'App\\Models\\PublicModel' => $baseDir . '/app/Models/PublicModel.php',
+    'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
