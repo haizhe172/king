@@ -110,15 +110,13 @@ Route::group(['prefix'=>'admin'],function(){
 
 	Route::group(['prefix'=>'ad'],function(){
 		Route::get("create","admin\AdController@create");
+		Route::post("store","admin\AdController@store");//执行添加
+		Route::get("index","admin\AdController@index");//列表页
+		Route::get("del/{position_id}","admin\AdController@destroy");//删除
+		Route::get("edit/{position_id}","admin\AdController@edit");//修改视图
+		Route::post("update/{position_id}","admin\AdController@update");//执行修改
 
 	});
-
-
-
-
-
-
-
 
 
 
@@ -135,7 +133,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::get("del/{position_id?}","admin\PositionController@destroy");//删除
 		Route::get("edit/{position_id}","admin\PositionController@edit");//修改视图
 		Route::post("update/{position_id}","admin\PositionController@update");//执行修改
-
+		Route::get("show/{position_id}","admin\PositionController@show");//查看广告
 
 	});
 
