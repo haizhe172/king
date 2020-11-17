@@ -32,6 +32,7 @@ Route::group(['prefix'=>'merchant'],function(){
 
 
 
+	
 });
 
 Route::group(['prefix'=>'admin'],function(){
@@ -113,6 +114,15 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 
 
 
+	Route::group(['prefix'=>'ad'],function(){
+		Route::get("create","admin\AdController@create")->name("ad.create");
+		Route::post("store","admin\AdController@store")->name("ad.store");//执行添加
+		Route::get("index","admin\AdController@index")->name("ad.index");//列表页
+		Route::get("del","admin\AdController@destroy")->name("ad.del");//删除
+		Route::get("edit","admin\AdController@edit")->name("ad.edit");//修改视图
+		Route::post("update","admin\AdController@update")->name("ad.update");//执行修改
+
+	});
 
 
 
@@ -121,13 +131,17 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 
 
 
+	//广告位
+	Route::group(['prefix'=>'position'],function(){
+		Route::get("create","admin\PositionController@create")->name("position.create");//添加视图
+		Route::post("store","admin\PositionController@store")->name("position.store");//执行添加
+		Route::get("index","admin\PositionController@index")->name("position.index");//列表页
+		Route::get("del/{position_id?}","admin\PositionController@destroy")->name("position.del");//删除
+		Route::get("edit","admin\PositionController@edit")->name("position.edit");//修改视图
+		Route::post("update","admin\PositionController@update")->name("position.update");//执行修改
+		Route::get("show","admin\PositionController@show")->name("position.show");//查看广告
 
-
-
-
-
-
-
+	});
 
 
 
@@ -159,10 +173,10 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
             return view('admin.news.create');
         })->name("admin.create");
         Route::post("/create/do","admin\NewsController@createdo")->name("admin.create.do");
-        Route::get("/index","admin\NewsController@index");
-        Route::get("/del","admin\NewsController@del");
-        Route::get("upd","admin\NewsController@upd");
-        Route::post("/upd/do","admin\NewsController@updo");
+        Route::get("/index","admin\NewsController@index")->name("admin.index");
+        Route::get("/del","admin\NewsController@del")->name("admin.del");
+        Route::get("upd","admin\NewsController@upd")->name("admin.upd");
+        Route::post("/upd/do","admin\NewsController@updo")->name("admin.updDo");
     });
 
 
@@ -209,11 +223,27 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 		Route::any("menu","admin\MenuController@menu")->name("menu.menu");
 		Route::any("menuDo","admin\MenuController@menuDo")->name("menu.menuDo");
 	});
+	//优惠券
+	Route::group(['prefix'=>'coupon'],function(){
+		Route::get("create","admin\CouponController@create")->name("coupon.create");
+		Route::get("sousuo","admin\CouponController@sousuo")->name("coupon.sousuo");
+		Route::get("updsou","admin\CouponController@updsou")->name("coupon.updsou");
+		Route::post("store","admin\CouponController@store")->name("coupon.store");
+		Route::get("index","admin\CouponController@index")->name("coupon.index");
+		Route::get("ajaxNames","admin\CouponController@ajaxNames")->name("coupon.ajaxNames");
+		Route::get("upd","admin\CouponController@upd")->name("coupon.upd");
+		Route::any("updDo","admin\CouponController@updDo")->name("coupon.updDo");
+		Route::any("del","admin\CouponController@del")->name("coupon.del");
+	});
 });
 
 Route::group(['prefix'=>'/'],function(){
 	Route::group(['prefix'=>'chat'],function(){
 		Route::get("chat","index\ChatController@chat");
 		Route::get("user","index\ChatController@user");
+		Route::any("init","index\ChatController@init");
+		Route::get("merchant","index\ChatController@merchant");
+		Route::any("say","index\ChatController@say");
+
 	});
 });

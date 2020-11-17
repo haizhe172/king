@@ -25,36 +25,38 @@
     <script src="/index/chat/chat.js"></script>
 </head>
 <div id="app">
-<form @submit.prevent="onSubmit">
 <body lang="zh">
     <img style="width:100%;height:100%" src="https://wallpaperm.cmcm.com/2d64f9b1d09b9c519b301d4d721adc0c.jpg">
     <div class="abs cover contaniner">
         <div class="abs cover pnl">
-            <div class="top pnl-head"></div>
+            <div class="pnl-head">
+                <b style="margin-left: 430px;">{{$data_name}}</b>
+                <input type="type" value="{{$send_alone}}">
+                <input type="type" value="{{$take_alone}}">
+            </div>
             <div class="abs cover pnl-body" id="pnlBody">
-                <div class="abs cover pnl-left">
+                <div class="abs cover">
                     <div class="abs cover pnl-msgs scroll" id="show">
-                        <div class="msg min time" id="histStart">加载历史消息</div>
-                        <div class="msg min time">@{{sta}}</div>
+                        <div class="msg min time" id="histStart">请勿聊钱多多客服小姐姐</div>
 
                         <div class="pnl-list" id="hists">
                             <!-- 历史消息 -->
                         </div>
                         <div class="pnl-list" id="msgs">  
                             <div class="msg robot">
-                                <b style="margin-left: 550px;">小龙</b>
+                                <b style="margin-left: 850px;">小龙</b>
                                 <div class="msg-right">
                                     <div class="msg-host photo" style="background-image: url(https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1194131577,2954769920&fm=26&gp=0.jpg)"></div>
                                     <div class="msg-ball" title="今天 17:52:06">你好，我是只能打字的聊天机器人<br><br>您是想要了解哪些方面呢？</div>
                                 </div>
                             </div>
-                            <div class="msg robot" v-for = "message in messages">
-                                <b style="margin-left: 20px;">@{{message.user_id}}</b>
+                            <div class="msg robot">
+                                <b style="margin-left: 10px;">小白</b>
                                 <div class="msg-left">
                                     <div class="msg-host photo" style="background-image: url(https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3123765718,3071569660&fm=111&gp=0.jpg8)"></div>
                                     <div class="msg-ball">
                                         {{date("Y-m-d h:i:s",time())}}
-                                        <br>@{{message.message}}
+                                        <br>你好
                                     </div>
                                 </div>
                             </div>
@@ -79,63 +81,45 @@
                                 <ul class="atcom" id="atcom"></ul>
                             </div>
                         </div>
-                        <div class="abs br pnl-btn" id="submit" style="background-color: rgb(32, 196, 202); color: rgb(255, 255, 255);" οnclick="SendMsg()"><button type="submin">发送</button></div>
+                        <div class="abs br pnl-btn" id="submit" style="background-color: rgb(32, 196, 202); color: rgb(255, 255, 255);" @click="SendMsg()">发送</div>
                         <div class="pnl-support" id="copyright"><a href="#">版权什么的</a></div>
-                    </div>
-                </div>
-                <div class="abs right pnl-right">
-                    <div class="slider-container hide"></div>
-                    <div class="pnl-right-content">
-                        <div class="pnl-tabs">
-                            <div class="tab-btn active" id="hot-tab">常见问题</div>
-                            <div class="tab-btn" id="rel-tab">相关问题</div>
-                        </div>
-                        <div class="pnl-hot">
-                            <ul class="rel-list unselect" id="hots">
-                                <!-- <li class="rel-item">这是一个问题，这是一个问题？</li> -->
-                            </ul>
-                        </div>
-                        <div class="pnl-rel" style="display: none;">
-                            <ul class="rel-list unselect" id="rels">
-                                <!-- <li class="rel-item">这是一个问题，这是一个问题？</li> -->
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>     
-</form>   
 </div>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     var ws = new WebSocket("ws://127.0.0.1:7272");
+    var send = "{{$send_alone}}";
+    var take = "{{$take_alone}}";
     var app = new Vue({
         el:"#app",
         data:{
             messages:[],
             content:"",
-            sta:""
+            send:"",
+            take:"",
         },
         created:function(){
             ws.onmessage = function(e){
                 console.log(e.data);
-                var status = isJSON(e.data);
-                if(status){
-                    this.messages.push(JSON.parse(e.data));
-                }else{
-                    this.sta = e.data;
-                } 
-                this.content="";
+                let data =JSON.parse(e.data);
+                let type = data.type || "";
+                switch(type){
+                    case 'init':
+                    axios.post("/chat/init",{client_id:data.client_id});
+                    break;
+                }
             }.bind(this);
         },
         methods:{
-            onSubmit:function(){
-                console.log(this.messages);
-                ws.send(this.content);
-                test();
+            SendMsg:function(){
+                axios.post("/chat/say",{content:this.content,send_alone:send,take_alone:take});
             }
         }
     }) ;
