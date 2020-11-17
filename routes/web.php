@@ -194,7 +194,6 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 
 
 
-
 	//快报
     Route::group(['prefix'=>'news'],function(){
         //添加快报
@@ -207,7 +206,16 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
         Route::get("upd","admin\NewsController@upd")->name("admin.upd");
         Route::post("/upd/do","admin\NewsController@updo")->name("admin.updDo");
     });
-
+//导航栏
+    Route::group(['prefix'=>'cate'],function(){
+        //导航栏添加
+        Route::get("/create","admin\CateController@create");
+        Route::post("/create/do","admin\CateController@createdo");
+        Route::get("/index","admin\CateController@index");
+        Route::get("/del/{id}","admin\CateController@del");
+        Route::get("/upda/{id}","admin\CateController@updata");
+        Route::post("/upda/do","admin\CateController@updatado");
+    });
 
 
 
