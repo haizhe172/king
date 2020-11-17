@@ -62,6 +62,10 @@ class AdController extends Controller
     public function store(Request $request)
     {
         $post=$request->except('_token');
+        // 转换时间戳int类型  strtotime()内置时间函数
+        $post['start_time']=strtotime($post['start_time']);
+        $post['end_time']=strtotime($post['end_time']);
+
         if ($request->hasFile('ad_image') && $request->file('ad_image')->isValid()) {
             $photo = $request->file('ad_image');
             $post['ad_image'] = env('UPLOADS_URL').'/'.$photo->store('upload');
@@ -112,6 +116,15 @@ class AdController extends Controller
     {
         $id = request()->get("id");
         $post=$request->except('_token');
+        // 转换时间戳int类型  strtotime()内置时间函数
+        $post['start_time']=strtotime($post['start_time']);
+        $post['end_time']=strtotime($post['end_time']);
+
+        if ($request->hasFile('ad_image') && $request->file('ad_image')->isValid()) {
+            $photo = $request->file('ad_image');
+            $post['ad_image'] = env('UPLOADS_URL').'/'.$photo->store('upload');
+            // dd();
+        }
         $res=Ad::where('ad_id',$id)->update($post);
         if($res!==false){
             return redirect('admin/ad/index');

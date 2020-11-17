@@ -41,7 +41,7 @@ class PositionController extends Controller
     }
     // 删除
     public function destroy($id=0){
-        // dd($id);
+        dd($id);
         // 全删
         $id=request()->id?:$id;  
         if(!$id){

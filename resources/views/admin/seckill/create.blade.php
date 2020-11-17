@@ -1,3 +1,5 @@
+@extends('layout.admin.layout')
+@section('content')
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
@@ -48,7 +50,7 @@
 
 
 
-                <form action="admin/ad/update?id={{$ad->ad_id}}" method="post" enctype="multipart/form-data">
+                <form action="{{url('admin/seckill/store')}}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="box-body">
@@ -59,7 +61,7 @@
                         <!--tab头-->
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a href="#home" data-toggle="tab">广告基本信息修改</a>
+                                <a href="#home" data-toggle="tab">秒杀商品基本信息添加</a>
                             </li>
                         </ul>
                         <!--tab头/-->
@@ -71,36 +73,33 @@
                             <!--表单内容-->
                             <div class="tab-pane active" id="home">
                                 <div class="row data-type">
-		                           <div class="col-md-2 title">广告名称</div>
+		                           <div class="col-md-2 title">秒杀活动名称</div>
 		                           <div class="col-md-5 data">
-		                               <input type="text" class="form-control" value="{{$ad->ad_name}}"  name="ad_name"  placeholder="请输入广告名称...">
+		                               <input type="text" class="form-control"  name="seckill_name"  placeholder="请输入秒杀活动名称...">
 		                           </div>
                                    <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_name')}}</b> -->
                                 </div>
-                    
+
                                 <div class="row data-type">
-		                           <div class="col-md-2 title">媒介类型</div>
+		                           <div class="col-md-2 title">选择商品</div>
 		                           <div class="col-md-5 data">
-                                        <select name="template_id" id="" class="form-control" >
+                                        <select name="goods_id" id="" class="form-control" >
                                             <option value="">==请选择==</option>
-                                            @foreach($template as $v)
-                                            <option value="{{$v->template_id}}" {{$v->template_id==$ad->template_id ? "selected" : ""}}>{{$v->template_name}}</option>
+                                            @foreach($admin_goods as $v)
+                                            <option value="{{$v->goods_id}}">{{$v->goods_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                    <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_width')}}</b> -->
                                 </div>
+
+                    
                                 <div class="row data-type">
-		                           <div class="col-md-2 title">广告位置</div>
+		                           <div class="col-md-2 title">商品库存</div>
 		                           <div class="col-md-5 data">
-                                        <select name="position_id" id="" class="form-control" >
-                                            <option value="">==请选择==</option>
-                                            @foreach($position as $v)
-                                            <option value="{{$v->position_id}}" {{$v->position_id==$ad->position_id ? "selected" : ""}}>{{$v->position_name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                   <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_height')}}</b> -->
+		                               <input type="text" class="form-control"  name="goods_num"  placeholder="请输入商品库存...">
+		                           </div>
+                                   <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_name')}}</b> -->
                                 </div>
 
                                 <div class="row data-type">
@@ -108,7 +107,7 @@
 		                           <div class="col-md-5 data form-group">
                                         <!--指定 date标记-->
                                         <div class='input-group date col-sm-9' id='datetimepicker1'>
-                                            <input type="text" class="form-control" name="start_time" value="{{date('Y-m-d',$ad->start_time)}}">
+                                            <input type="text" class="form-control" name="start_time">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -122,7 +121,7 @@
 		                           <div class="col-md-5 data form-group">
                                         <!--指定 date标记-->
                                         <div class='input-group date col-sm-9' id='datetimepicker2'>
-                                            <input type="text" class="form-control" name="end_time" value="{{date('Y-m-d',$ad->end_time)}}">
+                                            <input type="text" class="form-control" name="end_time">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -132,33 +131,18 @@
                                 </div>
 
                                 <div class="row data-type">
-		                           <div class="col-md-2 title">广告链接</div>
-		                           <div class="col-md-5 data">
-                                       <input type="text" class="form-control"  name="ad_link" value="{{$ad->ad_link}}"  placeholder="请输入广告链接...">
+		                           <div class="col-md-2 title" style="height:70px;">秒杀活动介绍</div>
+		                           <div class="col-md-5 data" style="height:70px;">
+		                               <textarea class="form-control"  name="seckill_desc"  placeholder="请输入秒杀活动介绍..."></textarea>
 		                           </div>
                                    <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_desc')}}</b> -->
                                 </div>
 
                                 <div class="row data-type">
-                                    <div class="col-md-2 title">广告图片</div>
-                                    <div class="col-md-5 data">
-                                        <input type="file" class="form-control" name="ad_image">
-                                    </div>
-                                    @if($ad->ad_image)<img src="{{$ad->ad_image}}" width="60"> @endif
-                                    <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('template_id')}}</b> -->
-                                </div>
-                                <div class="row data-type">
-		                           <div class="col-md-2 title">图片网址</div>
-		                           <div class="col-md-5 data">
-                                       <input type="text" class="form-control" value="{{$ad->image_url}}"  name="image_url"  placeholder="请输入广告图片网址...">
-		                           </div>
-                                   <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_desc')}}</b> -->
-                                </div>
-                                <div class="row data-type">
 		                           <div class="col-md-2 title">是否开启</div>
 		                           <div class="col-md-10 data">
-                                       <input type="radio"  name="is_on"  value="1" {{$ad->is_on==1 ? "checked" : ""}}>开启
-                                       <input type="radio"  name="is_on"  value="2" {{$ad->is_on==2 ? "checked" : ""}}>关闭
+                                       <input type="radio"  name="is_on"  value="1" checked>开启
+                                       <input type="radio"  name="is_on"  value="2">关闭
 		                           </div>
                                    <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_desc')}}</b> -->
                                 </div>
@@ -177,7 +161,7 @@
                    </div>
                   <div class="btn-toolbar list-toolbar">
 				      <!-- <button class="btn btn-primary" ng-click="setEditorValue();save()"><i class="fa fa-save"></i>添加</button> -->
-                      <button class="btn btn-primary" type="submit">修改</button>
+                      <button class="btn btn-primary" type="submit">添加</button>
 				      <button class="btn btn-default" ng-click="goListPage()" type="reset">清除</button>
 				  </div>
                   </form>
@@ -213,3 +197,4 @@ $(function(){
     });
 });
 </script>
+@endsection
