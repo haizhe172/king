@@ -145,7 +145,6 @@ Route::group(['prefix'=>'admin'],function(){
 
 
 
-
 	//快报
     Route::group(['prefix'=>'news'],function(){
         //添加快报
@@ -158,7 +157,16 @@ Route::group(['prefix'=>'admin'],function(){
         Route::get("/upd/{id}","admin\NewsController@upd");
         Route::post("/upd/do","admin\NewsController@updo");
     });
-
+//导航栏
+    Route::group(['prefix'=>'cate'],function(){
+        //导航栏添加
+        Route::get("/create","admin\CateController@create");
+        Route::post("/create/do","admin\CateController@createdo");
+        Route::get("/index","admin\CateController@index");
+        Route::get("/del/{id}","admin\CateController@del");
+        Route::get("/upda/{id}","admin\CateController@updata");
+        Route::post("/upda/do","admin\CateController@updatado");
+    });
 
 
 
