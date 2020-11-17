@@ -101,24 +101,14 @@ Route::group(['prefix'=>'admin'],function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	Route::group(['prefix'=>'ad'],function(){
-		Route::get("create","admin\AdController@create");
+	//秒杀商品表
+	Route::group(['prefix'=>'seckill'],function(){
+		Route::get("create","admin\SeckillController@create");
+		Route::post("store","admin\SeckillController@store");//执行添加
+		Route::get("indexs","admin\SeckillController@indexs");
+		Route::get("del/{position_id}","admin\SeckillController@destroy");//删除
+		Route::get("edit/{position_id}","admin\SeckillController@edit");//修改视图
+		Route::post("update/{position_id}","admin\SeckillController@update");//执行修改
 
 	});
 
@@ -135,6 +125,23 @@ Route::group(['prefix'=>'admin'],function(){
 
 
 
+	//广告 
+	Route::group(['prefix'=>'ad'],function(){
+		Route::get("create","admin\AdController@create");
+		Route::post("store","admin\AdController@store");//执行添加
+		Route::get("index","admin\AdController@index");//列表页
+		Route::get("del/{position_id}","admin\AdController@destroy");//删除
+		Route::get("edit/{position_id}","admin\AdController@edit");//修改视图
+		Route::post("update/{position_id}","admin\AdController@update");//执行修改
+
+	});
+
+
+
+
+
+
+
 
 	//广告位
 	Route::group(['prefix'=>'position'],function(){
@@ -144,7 +151,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::get("del/{position_id?}","admin\PositionController@destroy");//删除
 		Route::get("edit/{position_id}","admin\PositionController@edit");//修改视图
 		Route::post("update/{position_id}","admin\PositionController@update");//执行修改
-
+		Route::get("show/{position_id}","admin\PositionController@show");//查看广告
 
 	});
 
