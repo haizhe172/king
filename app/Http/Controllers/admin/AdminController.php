@@ -77,7 +77,7 @@ class AdminController extends Controller
             return $this->datacode("false","00001","非法操作");
         }
         $res = Admin::where("admin_id",$arr["id"])->update([$arr["fined"]=>$arr["new_name"]]);
-        dd($res);
+        // dd($res);
         if($res){
             return $this->datacode("true","00000","修改成功");
         }else{
@@ -141,7 +141,7 @@ class AdminController extends Controller
             return redirect('/admin/admin/index');
         }
     }
-
+    
     //管理员提示信息
     public function datacode($status="",$code=1,$msg="",$result=""){
         $message = [];

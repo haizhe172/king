@@ -1,32 +1,29 @@
-@extends('layout.admin.layout')
-@section('title',"运维")
-@section('content')
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>品牌编辑</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
 
-    <head>
-        <!-- 页面meta -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>品牌编辑</title>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/admin/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/admin/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="/admin/plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/admin/css/style.css">
+	<script src="/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/admin/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/plugins/adminLTE/css/AdminLTE.css">
-        <link rel="stylesheet" href="/plugins/adminLTE/css/skins/_all-skins.min.css">
-        <link rel="stylesheet" href="/css/style.css">
-        <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
-        <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-        <!-- 富文本编辑器 -->
-        <link rel="stylesheet" href="/plugins/kindeditor/themes/default/default.css" />
-        <script charset="utf-8" src="/plugins/kindeditor/kindeditor-min.js"></script>
-        <script charset="utf-8" src="/plugins/kindeditor/lang/zh_CN.js"></script>
-        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
-
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- 富文本编辑器 -->
+	<link rel="stylesheet" href="/admin/plugins/kindeditor/themes/default/default.css" />
+	<script charset="utf-8" src="/admin/plugins/kindeditor/kindeditor-min.js"></script>
+	<script charset="utf-8" src="/admin/plugins/kindeditor/lang/zh_CN.js"></script>
 
 
-    </head>
+
+
+
+</head>
 
     <body class="hold-transition skin-red sidebar-mini" >
 
@@ -197,5 +194,4 @@
         });
     </script>
 
-@endsection
 

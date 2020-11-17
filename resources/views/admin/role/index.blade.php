@@ -1,5 +1,3 @@
-@extends('layout.admin.layout')
-@section('content')
 <html>
 
 <head>
@@ -22,7 +20,7 @@
   <!-- .box-body -->
 
                     <div class="box-header with-border">
-                        <h3 class="box-title">管理员管理</h3>
+                        <h3 class="box-title">角色管理</h3>
                     </div>
 
                     <div class="box-body">
@@ -33,7 +31,7 @@
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
                                     <form action="/admin/role/index">
-							                  管理员名称：<input type="text" name="role_name" value="{{$role_name??''}}">
+							                  角色名称：<input type="text" name="role_name" value="{{$role_name??''}}">
 									<button type="submit" class="btn btn-default" >查询</button>
                                     </form>
                                 </div>
@@ -47,8 +45,8 @@
 			                              <th class="" style="padding-right:0px">
 			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
 			                              </th>
-										  <th class="sorting_asc">管理员ID</th>
-									      <th class="sorting">管理员名称</th>
+										  <th class="sorting_asc">角色ID</th>
+									      <th class="sorting">角色名称</th>
 									      <th class="sorting">添加时间</th>
 					                      <th class="text-center">操作</th>
 			                          </tr>
@@ -65,7 +63,7 @@
 		                                  <td class="text-center">
 		                                 	  <a href="/admin/role/upd?id={{$itme->role_id}}" class="btn bg-olive btn-xs">修改</a>
 		                                 	  <a href="/admin/role/del?id={{$itme->role_id}}" class="btn bg-olive btn-xs">删除</a>
-											  <button class="btn btn-default" ng-click="goListPage()"><a href="{{url('/admin/role/role',$itme->role_id)}}">添加角色</a></button>
+											  <button class="btn btn-default" ng-click="goListPage()"><a href="/admin/menu/menu?id={{$itme->role_id}}">添加权限</a></button>
 		                                   </td>
 			                          </tr>
                                       @endforeach
@@ -112,7 +110,7 @@
             // console.log(data);
             if(new_name==""){
                 // alert("123");
-                $(this).next().children().text("管理员名称不能为空");
+                $(this).next().children().text("角色名称不能为空");
                 return false;
             }else{
                 $.get(
@@ -173,5 +171,3 @@
             })
         })
 </script>
-
-@endsection

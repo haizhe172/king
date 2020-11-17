@@ -42,7 +42,9 @@ class NewsController extends Controller
     }
 
 
-    public  function del($id){
+    public  function del(){
+        
+        $id = request()->get("id");
 //        dd($id);
 
             $frist=Admin_news::where(['n_id'=>$id])->first();
@@ -65,8 +67,9 @@ class NewsController extends Controller
         }
 
 
-    public function upd($id){
+    public function upd(){
 //        dd($id);
+        $id = request()->get("id");
         $frist=Admin_news::where('n_id',$id)->first();
         return view('admin.news.updata',['data'=>$frist]);
     }

@@ -1,5 +1,3 @@
-@extends('layout.admin.layout')
-@section('content')
 <html>
 
 <head>
@@ -65,7 +63,7 @@
 		                                  <td class="text-center">
 		                                 	  <a href="/admin/admin/upd?id={{$itme->admin_id}}" class="btn bg-olive btn-xs">修改</a>
 		                                 	  <a href="/admin/admin/del?id={{$itme->admin_id}}" class="btn bg-olive btn-xs">删除</a>
-											  <button class="btn btn-default" ng-click="goListPage()"><a href="{{url('/admin/role/role',$itme->admin_id)}}">添加角色</a></button>
+											  <button class="btn btn-default" ng-click="goListPage()"><a href="/admin/role/role?id={{$itme->admin_id}}">添加角色</a></button>
 		                                   </td>
 			                          </tr>
                                       @endforeach
@@ -173,5 +171,3 @@
             })
         })
 </script>
-
-@endsection
