@@ -42,7 +42,8 @@ class SeckillController extends Controller
         return view('admin.seckill.index',['admin_goods'=>$admin_goods,'seckill'=>$seckill]);
     }
     // 删除
-    public function destroy($id){
+    public function destroy($id=0){
+        $id = request()->get("id");
         $res=Seckill::where('seckill_id',$id)->update(['is_del'=>2]);
         if(request()->ajax()){
             return json_encode(['code'=>00000,'msg'=>'删除成功']);

@@ -43,6 +43,17 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 	Route::get("/","admin\IndexController@index")->name("admin.index");
 	Route::get("/home","admin\IndexController@home")->name("admin.home");
 
+	Route::prefix('/brand')->group(function(){
+		Route::any('/create','admin\BrandController@create')->name('brand.create');//品牌添加
+		Route::any('/store','admin\BrandController@store')->name('brand.store');//执行品牌添加
+		Route::any('/index','admin\BrandController@index')->name('brand.index');//品牌展示
+		Route::any('/upd','admin\BrandController@upd')->name('brand.upd');//品牌修改视图
+		Route::any('/updDo','admin\BrandController@updDo')->name('brand.updDo');//品牌执行修改
+		Route::any('/jd','admin\BrandController@jd')->name('brand.jd');//即点即改
+		Route::any('/del','admin\BrandController@del')->name('brand.del');//删除
+		Route::any('/bdels','admin\BrandController@bdels')->name('brand.dels');//批量删除
+	  });
+
 
 
 
@@ -103,9 +114,9 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 		Route::get("create","admin\SeckillController@create");
 		Route::post("store","admin\SeckillController@store");//执行添加
 		Route::get("indexs","admin\SeckillController@indexs");
-		Route::get("del/{position_id}","admin\SeckillController@destroy");//删除
-		Route::get("edit/{position_id}","admin\SeckillController@edit");//修改视图
-		Route::post("update/{position_id}","admin\SeckillController@update");//执行修改
+		Route::get("del","admin\SeckillController@destroy");//删除
+		Route::get("edit","admin\SeckillController@edit");//修改视图
+		Route::post("update","admin\SeckillController@update");//执行修改
 
 	});
 

@@ -1,5 +1,4 @@
-@extends('layout.admin.layout')
-@section('content')
+
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
@@ -197,4 +196,3 @@ $(function(){
     });
 });
 </script>
-@endsection

@@ -1,5 +1,3 @@
-@extends('layout.admin.layout')
-@section('content')
 <html>
 
 <head>
@@ -91,7 +89,7 @@
                                           </td>
                                           
 		                                  <td class="text-center">
-		                                 	  <a href="{{url('/admin/seckill/edit/'.$v->seckill_id)}}" class="btn bg-olive btn-xs">修改</a>
+		                                 	  <a href="/admin/seckill/edit?{{$v->seckill_id}}" class="btn bg-olive btn-xs">修改</a>
 		                                 	  <a href="javascript:;" class="btn bg-olive btn-xs" onclick="DeleteGetId({{$v->seckill_id}},this)">删除</a>
 											  <!-- <button class="btn btn-default" ng-click="goListPage()"><a href="#">添加广告</a></button> -->
 		                                   </td>
@@ -132,7 +130,7 @@
     //ajax删除
     function DeleteGetId(id,obj){
         // alert(id)
-        $.get('/admin/seckill/del/'+id,function(res){
+        $.get('/admin/seckill/del?id='+id,function(res){
             if(res.code==00000){
                 alert(res.msg);
                 location.reload();
@@ -168,4 +166,3 @@
 //         }
 //     })
 </script>
-@endsection
