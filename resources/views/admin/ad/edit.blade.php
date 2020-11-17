@@ -48,7 +48,7 @@
 
 
 
-                <form action="admin/ad/update?id={{$ad->ad_id}}" method="post" enctype="multipart/form-data">
+                <form action="/admin/ad/update?id={{$ad->ad_id}}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="box-body">

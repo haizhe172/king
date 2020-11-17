@@ -28,7 +28,7 @@
 
             <!-- 正文区域 -->
             <section class="content">
-                <form action="{{url('/admin/position/update/'.$position->position_id)}}" method="post" enctype="multipart/form-data">
+                <form action="/admin/position/update?id={{$position->position_id}}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="box-body">

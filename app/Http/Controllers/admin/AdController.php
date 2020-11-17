@@ -116,6 +116,8 @@ class AdController extends Controller
     {
         $id = request()->get("id");
         $post=$request->except('_token');
+        unset($post["id"]);
+        // dd($post);
         // 转换时间戳int类型  strtotime()内置时间函数
         $post['start_time']=strtotime($post['start_time']);
         $post['end_time']=strtotime($post['end_time']);
