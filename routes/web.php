@@ -18,11 +18,20 @@ Route::get('/', function () {
 });
 Route::group(['prefix'=>'merchant'],function(){
 	Route::get("/","merchant\IndexController@index");
-
-
-
-
-
+	Route::get("login","merchant\LoginController@login");
+	Route::get("dologin","merchant\LoginController@dologin");
+	Route::get("reg","merchant\LoginController@reg");
+	Route::group(['prefix'=>'public'],function(){
+		Route::get("head","merchant\IndexController@head");
+		Route::get("left","merchant\IndexController@left");
+		Route::get("goods","merchant\IndexController@goods");
+		Route::get("type","merchant\IndexController@type");
+	});
+	Route::group(['prefix'=>'goods'],function(){
+		Route::get("goods","merchant\GoodsController@goods");
+		Route::get("type","merchant\GoodsController@type");
+		Route::any("upload","merchant\GoodsController@upload");
+	});
 
 
 
