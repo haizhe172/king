@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\index;
+namespace App\Http\Controllers\index\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Lib\Curls;
+
 class IndexController extends Controller
 {
     public function index(){
-    	return view("index.index");
+    	$data = [1,3,4,56,67];
+    	return json_encode($data);
     }
 }
