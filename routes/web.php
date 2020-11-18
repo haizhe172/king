@@ -194,7 +194,6 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 
 
 
-
 	//快报
     Route::group(['prefix'=>'news'],function(){
         //添加快报
@@ -207,7 +206,16 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
         Route::get("upd","admin\NewsController@upd")->name("admin.upd");
         Route::post("/upd/do","admin\NewsController@updo")->name("admin.updDo");
     });
-
+//导航栏
+    Route::group(['prefix'=>'cate'],function(){
+        //导航栏添加
+        Route::get("/create","admin\CateController@create");
+        Route::post("/create/do","admin\CateController@createdo");
+        Route::get("/index","admin\CateController@index");
+        Route::get("/del/{id}","admin\CateController@del");
+        Route::get("/upda/{id}","admin\CateController@updata");
+        Route::post("/upda/do","admin\CateController@updatado");
+    });
 
 
 
@@ -264,9 +272,38 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 		Route::any("updDo","admin\CouponController@updDo")->name("coupon.updDo");
 		Route::any("del","admin\CouponController@del")->name("coupon.del");
 	});
+	//商品类型
+	Route::group(['prefix'=>'goodstype'],function(){
+		Route::any("create","admin\GoodstypeController@create")->name("goodstype.create");
+		Route::any("ajaxuniq","admin\GoodstypeController@ajaxuniq")->name("goodstype.ajaxuniq");
+		Route::any("store","admin\GoodstypeController@store")->name("goodstype.store");
+		Route::any("index","admin\GoodstypeController@index")->name("goodstype.index");
+		Route::any("ajaxNames","admin\GoodstypeController@ajaxNames")->name("goodstype.ajaxNames");
+		Route::any("del","admin\GoodstypeController@del")->name("goodstype.del");
+		Route::any("upd","admin\GoodstypeController@upd")->name("goodstype.upd");
+		Route::any("updDo","admin\GoodstypeController@updDo")->name("goodstype.updDo");
+		Route::any("attr","admin\GoodstypeController@attr")->name("goodstype.attr");
+	});
+	Route::group(['prefix'=>'goodsattr'],function(){
+		Route::any("create","admin\GoodsattrController@create")->name("goodsattr.create");
+		Route::any("store","admin\GoodsattrController@store")->name("goodsattr.store");
+		Route::any("upd","admin\GoodsattrController@upd")->name("goodsattr.upd");
+		Route::any("updDo","admin\GoodsattrController@updDo")->name("goodsattr.updDo");
+		Route::any("del","admin\GoodsattrController@del")->name("goodsattr.del");
+	});
+	//商品
+	Route::group(['prefix'=>'goods'],function(){
+		Route::any("create","admin\GoodsController@create")->name("goods.create");
+		Route::any("store","admin\GoodsController@store")->name("goods.store");
+		Route::any("goodsattr","admin\GoodsController@goodsattr")->name("goods.goodsattr");
+		Route::any("product","admin\GoodsController@product")->name("goods.product");
+		Route::any("index","admin\GoodsController@index")->name("goods.index");
+		Route::any("del","admin\GoodsController@del")->name("goods.del");
+	});
 });
 
 Route::group(['prefix'=>'/'],function(){
+		Route::get("/","index\IndexController@index");
 	Route::group(['prefix'=>'chat'],function(){
 		Route::get("chat","index\ChatController@chat");
 		Route::get("user","index\ChatController@user");

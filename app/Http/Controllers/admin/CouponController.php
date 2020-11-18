@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\BrandModel as Brand;
+use App\Models\Goods;
 
 
 class CouponController extends Controller

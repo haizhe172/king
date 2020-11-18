@@ -70,6 +70,7 @@ class PositionController extends Controller
     public function update(){
         $id = request()->get("id");
         $post=request()->except('_token');
+        // unset($post["id"]);
         // dd($post);
         unset($post['id']);
         $res=Position::where('position_id',$id)->update($post);
