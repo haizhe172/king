@@ -30,5 +30,24 @@ class IndexController extends Controller
         // dd($data);
     	return json_encode($data);
     }
+    public function newsdesc(){
+        $id = request()->get("id");
+        $newsdesc = Admin_news::where(["is_del"=>1,"n_id"=>$id])->first();
+        if(!$news){
+            $data = [
+                "code"=>"00001",
+                "msg"=>"没有数据",
+                "result"=>[]
+            ];
+        }else{
+            $data = [
+                "code"=>"00000",
+                "msg"=>"获取成功",
+                "result"=>$newsdesc
+            ];
+        }
+        // dd($data);
+    	return json_encode($data);
+    }
 }
     

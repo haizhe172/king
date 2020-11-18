@@ -294,6 +294,9 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 		Route::any("init","index\ChatController@init");
 		Route::get("merchant","index\ChatController@merchant");
 		Route::any("say","index\ChatController@say");
+		});
+		Route::group(['prefix'=>'news'],function(){
+			Route::any("newsdesc/{id}","index\NewsController@newsdesc");
+		});
 
-	});
 });

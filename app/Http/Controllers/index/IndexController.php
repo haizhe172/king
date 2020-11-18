@@ -10,7 +10,13 @@ class IndexController extends Controller
     public function index(){
         $url = "http://api.king.com/index/news";
         $news = Curls::curl_get($url);
-        dd($news);
-    	return view("index.index");
+        if(!$news){
+            $news = [];
+        }
+        // dd($news);
+        $data = json_decode($news,false);
+        $news = $data->result->data;
+        // dd($news);
+    	return view("index.index",compact("news"));
     }
 }

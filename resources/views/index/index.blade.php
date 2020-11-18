@@ -122,12 +122,11 @@
 
                 <div class="content" id="con_two_1">
                     <ul class="tab-margin">
-                        <li><a href="">安骏DS官网隆重上线!&nbsp<span>2020-5-9</span></a></li>
-                        <li><a href="" title="安骏DS官网隆重上线！">安骏DS官网隆重上线！&nbsp<span>2020-5-9</span></a></li>
-                        <li><a href="">安骏DS官网隆重上线！&nbsp<span>2020-5-9</span></a></li>
-                        <li><a href="">安骏DS官网隆重上线！&nbsp<span>2020-5-9</span></a></li>
-                        <li><a href="">安骏DS官网隆重上线！&nbsp<span>2020-5-9</span></a></li>
-                        <li><a href="">安骏DS官网隆重上线！&nbsp<span>2020-5-9</span></a></li>
+                    @if($news)
+                    @foreach($news as $v)
+                        <li><a href="/news/newsdesc/{{$v->n_id}}">[@if($v->notice=="0") 公告 @elseif($v->notice=="1") 特惠 @else 热议 @endif]{{$v->title}}<span>{{date("Y-m-d",$v->add_time)}}</span></a></li>
+                    @endforeach
+                    @endif
 
                     </ul>
                 </div>

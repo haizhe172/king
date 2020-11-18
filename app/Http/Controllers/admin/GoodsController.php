@@ -67,7 +67,8 @@ class GoodsController extends Controller
                 // dd($file);
                 $goods_imgs=[];
                 foreach($file as $k=>$v){
-                    $goods_imgs[] = env('UPLOADS_URL').$photo->store('upload');
+                    // dd($v);
+                    $goods_imgs[] = env('UPLOADS_URL').$v->store('upload');
                 }
                 $data['goods_imgs']=implode('|',$goods_imgs);
             }

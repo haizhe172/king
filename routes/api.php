@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['domain' => 'api.king.com'], function () {
 	Route::get("/","index\api\IndexController@index");
 	Route::get("/index/news","index\api\IndexController@news");
+	Route::get("/index/newsdesc","index\api\IndexController@newsdesc");
+	Route::get("list","index\api\GoodsController@list");
 });
