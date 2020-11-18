@@ -57,7 +57,7 @@ class RouteServiceProvider extends ServiceProvider
      * @return void
      */
     protected function mapWebRoutes()
-    {
+    {   
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
@@ -72,7 +72,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
+        Route::domain('api.king.com')
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));

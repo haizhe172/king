@@ -30,14 +30,14 @@
                         <!-- 数据表格 -->
                         <div class="table-box">
 
-                            <!-- <div class="box-tools pull-right">
+                            <div class="box-tools pull-right">
                                 <div class="has-feedback">
-                                    <form action="/admin/seckill/index" method="get">
-							            <input type="text" placeholder="请输入广告名称..." name="ad_name" value="{{$ad_name??''}}">
-									<button type="submit" class="btn btn-default" >搜索</button>
+                                    <form action="/admin/seckill/indexs" method="get">
+                                        <input type="text" placeholder="请输入秒杀活动名称..." name="seckill_name" value="{{$seckill_name??''}}">
+                                        <button type="submit" class="btn btn-default" >搜索</button>
                                     </form>
                                 </div>
-                            </div> -->
+                            </div>
 
 			                  <!--数据列表-->
 			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
@@ -48,7 +48,7 @@
 			                              </th>
                                           <th class="sorting_asc">id</th>
                                           <th class="sorting">秒杀活动名称</th>
-                                          <th class="sorting">商品id</th>
+                                          <th class="sorting">商品名称</th>
                                           <th class="sorting">商品库存</th>
 									                        <th class="sorting">开始时间</th>
                                           <th class="sorting">结束时间</th>
@@ -61,7 +61,7 @@
 			                      <tbody>
                                       @foreach($seckill as $v)
 			                          <tr>
-                                          <td><input name="selall[]"  type="checkbox"></td>
+                                          <td><input name="selall[]" value="{{$v->seckill_id}}" type="checkbox"></td>
                                           <td>{{$v->seckill_id}}</td>
                                           <td attr_id="{{$v->seckill_name}}">
                                             <span class="span_name">{{$v->seckill_name}}</span>
@@ -73,13 +73,13 @@
                                             <span class="span_name">{{$v->goods_num}}</span>
                                           </td>
                                           <td attr_id="{{$v->start_time}}">
-                                            <span class="span_name">{{date('Y-m-d',$v->start_time)}}</span>
+                                            <span class="span_name">{{date('Y-m-d H:i:s',$v->start_time)}}</span>
                                           </td>
                                           <td attr_id="{{$v->end_time}}">
-                                            <span class="span_name">{{date('Y-m-d',$v->end_time)}}</span>
+                                            <span class="span_name">{{date('Y-m-d H:i:s',$v->end_time)}}</span>
                                           </td>
                                           <td attr_id="{{$v->create_time}}">
-                                            <span class="span_name">{{date('Y-m-d',$v->create_time)}}</span>
+                                            <span class="span_name">{{date('Y-m-d H:i:s',$v->create_time)}}</span>
                                           </td>
                                           <td attr_id="{{$v->seckill_desc}}">
                                             <span class="span_name">{{$v->seckill_desc}}</span>
@@ -89,7 +89,7 @@
                                           </td>
                                           
 		                                  <td class="text-center">
-		                                 	  <a href="/admin/seckill/edit?{{$v->seckill_id}}" class="btn bg-olive btn-xs">修改</a>
+		                                 	  <a href="/admin/seckill/edit?id={{$v->seckill_id}}" class="btn bg-olive btn-xs">修改</a>
 		                                 	  <a href="javascript:;" class="btn bg-olive btn-xs" onclick="DeleteGetId({{$v->seckill_id}},this)">删除</a>
 											  <!-- <button class="btn btn-default" ng-click="goListPage()"><a href="#">添加广告</a></button> -->
 		                                   </td>
@@ -97,7 +97,7 @@
                                       @endforeach
                                       <tr>
                                         <button type="button" class="btn bg-olive btn-xs delall">批量删除</button>
-                                        <td colspan="12" align="center">{{$seckill->links()}}</td>
+                                        <td colspan="12" align="center">{{$seckill->appends(['seckill_name'=>$seckill_name])->links()}}</td>
                                       </tr>
 			                      </tbody>
 			                  </table>
@@ -138,31 +138,35 @@
         },'json')
     }
 
-//     // 全选反选
-//     $('#selall:eq(0)').click(function(){
-//         // alert(123)
-//         var checkval = $("#selall").prop('checked');
-//         // alert(checkval);
-//         $('input[name="selall[]"]').prop('checked',checkval);
-//         // if(checkval){
-//         //     $('input[name="selall[]"]').addClass('checked');
-//         // }else{
-//         //     $('input[name="selall[]"]').removeClass('checked');
-//         // }
-//     })
-//     // 全删
-//     $('.delall').click(function(){
-//         // alert(123);
-//         var ids=new Array();
-//         $('input[name="selall[]"]:checked').each(function(i,k){
-//             ids.push($(this).val())
-//         });
-//         // alert(ids);
-//         if(confirm('确认要删除吗?')){
-//             $.get('/admin/position/del/',{id:ids},function(res){
-//                 alert(res.msg);
-//                 location.reload();
-//             },'json')
-//         }
-//     })
+    // 全选反选
+    $('#selall:eq(0)').click(function(){
+        // alert(123)
+        var checkval = $("#selall").prop('checked');
+        // alert(checkval);
+        $('input[name="selall[]"]').prop('checked',checkval);
+        // if(checkval){
+        //     $('input[name="selall[]"]').addClass('checked');
+        // }else{
+        //     $('input[name="selall[]"]').removeClass('checked');
+        // }
+    })
+    // 全删
+    $('.delall').click(function(){
+        // alert(123);
+        var ids=new Array();
+        $('input[name="selall[]"]:checked').each(function(i,k){
+            ids.push($(this).val())
+        });
+        // alert(ids);return;
+        if(ids.length<1){
+          alert('没有内容删除');
+          return;
+        }
+        if(confirm('确认要删除吗?')){
+            $.get('/admin/seckill/del/',{id:ids},function(res){
+                alert(res.msg);
+                location.reload();
+            },'json')
+        }
+    })
 </script>

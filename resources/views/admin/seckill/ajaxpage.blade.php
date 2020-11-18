@@ -1,8 +1,8 @@
 @foreach($seckill as $v)
 			                          <tr>
                                           <td><input name="selall[]"  type="checkbox"></td>
-				                          <td>{{$v->seckill_id}}</td>
-									      <td attr_id="{{$v->seckill_name}}">
+                                          <td>{{$v->seckill_id}}</td>
+                                          <td attr_id="{{$v->seckill_name}}">
                                             <span class="span_name">{{$v->seckill_name}}</span>
                                           </td>
                                           <td attr_id="{{$v->goods_id}}">
@@ -28,7 +28,7 @@
                                           </td>
                                           
 		                                  <td class="text-center">
-		                                 	  <a href="{{url('/admin/seckill/edit/'.$v->seckill_id)}}" class="btn bg-olive btn-xs">修改</a>
+		                                 	  <a href="/admin/seckill/edit?id={{$v->seckill_id}}" class="btn bg-olive btn-xs">修改</a>
 		                                 	  <a href="javascript:;" class="btn bg-olive btn-xs" onclick="DeleteGetId({{$v->seckill_id}},this)">删除</a>
 											  <!-- <button class="btn btn-default" ng-click="goListPage()"><a href="#">添加广告</a></button> -->
 		                                   </td>
@@ -36,5 +36,5 @@
                                       @endforeach
                                       <tr>
                                         <button type="button" class="btn bg-olive btn-xs delall">批量删除</button>
-                                        <td colspan="12" align="center">{{$seckill->links()}}</td>
+                                        <td colspan="12" align="center">{{$seckill->appends(['seckill_name'=>$seckill_name])->links()}}</td>
                                       </tr>
