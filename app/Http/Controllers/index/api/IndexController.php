@@ -11,4 +11,7 @@ class IndexController extends Controller
     	$data = [1,3,4,56,67];
     	return json_encode($data);
     }
+    public function list(){
+    	
+    }
 }
