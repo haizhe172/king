@@ -6,9 +6,6 @@ class Curls extends Controller
 {
 // $url 是请求的链接
 // $postdata 是传输的数据，数组格式
-	function test(){
-		return 3123;
-	}
 	function curl_post($url,$postdata) {
 	 
 	   $header = array(
