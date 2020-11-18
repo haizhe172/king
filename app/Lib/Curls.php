@@ -6,7 +6,7 @@ class Curls extends Controller
 {
 // $url 是请求的链接
 // $postdata 是传输的数据，数组格式
-	function curl_post($url,$postdata) {
+	public static function curl_post($url,$postdata) {
 	 
 	   $header = array(
 	       'Accept: application/json',
@@ -46,10 +46,7 @@ class Curls extends Controller
 	        curl_close($curl);
 	    }
 	}
-	function curl_get($url){
-		$header = array(
-	       'Accept: application/json',
-	    );
+	public static function curl_get($url){
 	    $curl = curl_init();
 	    //设置抓取的url
 	    curl_setopt($curl, CURLOPT_URL, $url);
@@ -62,7 +59,7 @@ class Curls extends Controller
 	    // curl_setopt($curl, CURLOPT_TIMEOUT_MS, 500);
 	 
 	    // 设置请求头
-	    curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+	    //curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 	    //设置获取的信息以文件流的形式返回，而不是直接输出。
 	    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);

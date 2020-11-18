@@ -298,6 +298,7 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 
 	Route::group(['prefix'=>'/'],function(){
 		Route::get("/","index\IndexController@index");
+		Route::any("list","index\GoodsController@list");
 		Route::group(['prefix'=>'chat'],function(){
 		Route::get("chat","index\ChatController@chat");
 		Route::get("user","index\ChatController@user");
