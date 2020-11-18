@@ -119,8 +119,6 @@
 
             <div id="tab">
                 <h3 class="active" id="two1" onmouseover="setContentTab(&#39;two&#39;,1,3)">公告</h3>
-                <h3 id="two2" onmouseover="setContentTab(&#39;two&#39;,2,3)">规则</h3>
-                <h3 id="two3" onmouseover="setContentTab(&#39;two&#39;,3,3)">新手入门</h3>
 
                 <div class="content" id="con_two_1">
                     <ul class="tab-margin">
@@ -133,21 +131,6 @@
 
                     </ul>
                 </div>
-
-                <div id="con_two_2">
-                    <ul class="tab-margin">
-                        <li><a href="">新手入门22</a></li>
-                        <li><a href="">新手入门2</a></li>
-                        <li><a href="">新手入门2</a></li>
-                        <li><a href="">新手入门2</a></li>
-                    </ul></div>
-                <div id="con_two_3">
-                    <ul class="tab-margin">
-                        <li><a href="">新手入门3</a></li>
-                        <li><a href="">新手入门3</a></li>
-                        <li><a href="">新手入门3</a></li>
-                        <li><a href="">新手入门3</a></li>
-                    </ul></div>
 
 
             </div>
