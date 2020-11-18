@@ -28,15 +28,6 @@ Route::group(['prefix'=>'merchant'],function(){
 		Route::get("type","merchant\GoodsController@type");
 		Route::any("upload","merchant\GoodsController@upload");
 	});
-
-
-
-
-
-
-
-
-
 	
 });
 
@@ -113,17 +104,15 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 
 
 
-
-	//秒杀商品表
-	Route::group(['prefix'=>'seckill'],function(){
-		Route::get("create","admin\SeckillController@create");
-		Route::post("store","admin\SeckillController@store");//执行添加
-		Route::get("indexs","admin\SeckillController@indexs");
-		Route::get("del","admin\SeckillController@destroy");//删除
-		Route::get("edit","admin\SeckillController@edit");//修改视图
-		Route::post("update","admin\SeckillController@update");//执行修改
-	});
-
+		//秒杀商品表
+		Route::group(['prefix'=>'seckill'],function(){
+			Route::get("create","admin\SeckillController@create");
+			Route::post("store","admin\SeckillController@store");//执行添加
+			Route::get("indexs","admin\SeckillController@indexs");
+			Route::get("del","admin\SeckillController@destroy");//删除
+			Route::get("edit","admin\SeckillController@edit");//修改视图
+			Route::post("update","admin\SeckillController@update");//执行修改
+		});
 
 
 
@@ -298,6 +287,7 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 
 	Route::group(['prefix'=>'/'],function(){
 		Route::get("/","index\IndexController@index");
+		Route::any("list","index\GoodsController@list");
 		Route::group(['prefix'=>'chat'],function(){
 		Route::get("chat","index\ChatController@chat");
 		Route::get("user","index\ChatController@user");
