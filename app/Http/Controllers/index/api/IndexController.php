@@ -27,7 +27,8 @@ class IndexController extends Controller
                 "result"=>$news
             ];
         }
-        dd($data);
+        // dd($data);
     	return json_encode($data);
     }
 }
+    

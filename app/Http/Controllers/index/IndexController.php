@@ -10,7 +10,7 @@ class IndexController extends Controller
     public function index(){
         $url = "http://api.king.com/index/news";
         $news = Curls::curl_get($url);
-        print_r($url);
+        dd($news);
     	return view("index.index");
     }
 }
