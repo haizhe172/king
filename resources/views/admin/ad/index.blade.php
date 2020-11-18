@@ -62,7 +62,7 @@
 			                      <tbody>
                                       @foreach($ad as $v)
 			                          <tr>
-                                          <td><input name="selall[]"  type="checkbox"></td>
+                                          <td><input name="selall[]" value="{{$v->ad_id}}" type="checkbox"></td>
 				                          <td>{{$v->ad_id}}</td>
 									      <td attr_id="{{$v->ad_id}}">
                                             <span class="span_name">{{$v->ad_name}}</span>
@@ -74,10 +74,10 @@
                                             <span class="span_name">{{$v->position_name}}</span>
                                           </td>
                                           <td attr_id="{{$v->start_time}}">
-                                            <span class="span_name">{{date('Y-m-d',$v->start_time)}}</span>
+                                            <span class="span_name">{{date('Y-m-d H:i:s',$v->start_time)}}</span>
                                           </td>
                                           <td attr_id="{{$v->end_time}}">
-                                            <span class="span_name">{{date('Y-m-d',$v->end_time)}}</span>
+                                            <span class="span_name">{{date('Y-m-d H:i:s',$v->end_time)}}</span>
                                           </td>
                                           <td attr_id="{{$v->ad_link}}">
                                             <span class="span_name">{{$v->ad_link}}</span>
@@ -154,19 +154,23 @@
         //     $('input[name="selall[]"]').removeClass('checked');
         // }
     })
-//     // 全删
-//     $('.delall').click(function(){
-//         // alert(123);
-//         var ids=new Array();
-//         $('input[name="selall[]"]:checked').each(function(i,k){
-//             ids.push($(this).val())
-//         });
-//         // alert(ids);
-//         if(confirm('确认要删除吗?')){
-//             $.get('/admin/position/del/',{id:ids},function(res){
-//                 alert(res.msg);
-//                 location.reload();
-//             },'json')
-//         }
-//     })
+    // 全删
+    $('.delall').click(function(){
+        // alert(123);
+        var ids=new Array();
+        $('input[name="selall[]"]:checked').each(function(i,k){
+            ids.push($(this).val())
+        });
+        // alert(ids);
+        if(ids.length<1){
+          alert('没有内容删除');
+          return;
+        }
+        if(confirm('确认要删除吗?')){
+            $.get('/admin/ad/del/',{id:ids},function(res){
+                alert(res.msg);
+                location.reload();
+            },'json')
+        }
+    })
 </script>

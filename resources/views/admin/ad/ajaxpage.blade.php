@@ -1,6 +1,6 @@
 @foreach($ad as $v)
 			                          <tr>
-                                          <td><input name="selall[]"  type="checkbox"></td>
+                                          <td><input name="selall[]" value="{{$v->ad_id}}" type="checkbox"></td>
 				                          <td>{{$v->ad_id}}</td>
 									      <td attr_id="{{$v->ad_id}}">
                                             <span class="span_name">{{$v->ad_name}}</span>
@@ -31,7 +31,7 @@
                                           </td>
                                           
 		                                  <td class="text-center">
-		                                 	  <a href="{{url('/admin/ad/edit/'.$v->ad_id)}}" class="btn bg-olive btn-xs">修改</a>
+		                                 	  <a href="/admin/ad/edit?id={{$v->ad_id}}" class="btn bg-olive btn-xs">修改</a>
 		                                 	  <a href="javascript:;" class="btn bg-olive btn-xs" onclick="DeleteGetId({{$v->ad_id}},this)">删除</a>
 											  <!-- <button class="btn btn-default" ng-click="goListPage()"><a href="#">添加广告</a></button> -->
 		                                   </td>

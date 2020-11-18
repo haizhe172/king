@@ -41,18 +41,20 @@ class PositionController extends Controller
     }
     // 删除
     public function destroy($id=0){
-        dd($id);
+        //dd($id);
         // 全删
         $id=request()->id?:$id;  
         if(!$id){
             return;
         }
-        // 单删
-        $res=Position::where('position_id',$id)->update(['is_del'=>2]);
         if(request()->ajax()){
+            $res=Position::whereIn('position_id',$id)->update(['is_del'=>2]);
             return json_encode(['code'=>00000,'msg'=>'删除成功']);
         }
         // dd($res);
+
+        // 单删
+        $res=Position::where('position_id',$id)->update(['is_del'=>2]);
         if($res){
             return redirect('admin/position/index');
         }
@@ -70,6 +72,7 @@ class PositionController extends Controller
         $post=request()->except('_token');
         // unset($post["id"]);
         // dd($post);
+        unset($post['id']);
         $res=Position::where('position_id',$id)->update($post);
         if($res!==false){
             return redirect('admin/position/index');

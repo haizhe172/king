@@ -58,7 +58,7 @@
 			                      <tbody>
                                       @foreach($position as $v)
 			                          <tr>
-                                          <td><input name="selall[]"  type="checkbox"></td>
+                                          <td><input name="selall[]"  type="checkbox" value="{{$v->position_id}}"></td>
 				                          <td>{{$v->position_id}}</td>
 									      <td attr_id="{{$v->position_id}}">
                                             <span class="span_name">{{$v->position_name}}</span>
@@ -146,6 +146,10 @@
         $('input[name="selall[]"]:checked').each(function(i,k){
             ids.push($(this).val())
         });
+        if(ids.length<1){
+            alert('没有内容删除');
+            return;
+        }
         // alert(ids);
         if(confirm('确认要删除吗?')){
             $.get('/admin/position/del/',{id:ids},function(res){

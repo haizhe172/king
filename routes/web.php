@@ -124,8 +124,6 @@ Route::group(['domain' => 'www.king.com'], function () {
 			Route::get("edit","admin\SeckillController@edit");//修改视图
 			Route::post("update","admin\SeckillController@update");//执行修改
 
-		});
-
 
 
 
@@ -147,8 +145,7 @@ Route::group(['domain' => 'www.king.com'], function () {
 			Route::get("del","admin\AdController@destroy")->name("ad.del");//删除
 			Route::get("edit","admin\AdController@edit")->name("ad.edit");//修改视图
 			Route::post("update","admin\AdController@update")->name("ad.update");//执行修改
-
-		});
+	//广告 
 
 
 
