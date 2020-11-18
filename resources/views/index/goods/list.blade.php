@@ -190,18 +190,18 @@
 
         <div class="goods">
 <ul>
+    @foreach($data[0] as $k=>$v)
     <li class="goods-products">
-        <span><a href=""><img src="/index/images/normal1.jpg" alt="" width="250" height="215" class="main-img"></a></span>
+        <span><a href=""><img src="{{$v->goods_img}}" alt="" width="250" height="215" class="main-img"></a></span>
 
         <ul class="goods-small-img">
-            <li><img src="/index/images/normal1.jpg" alt="" width="50" height="50"></li>
-            <li><img src="/index/images/normal2.jpg" alt="" width="50" height="50"></li>
-            <li><img src="/index/images/normal3.jpg" alt="" width="50" height="50"></li>
-            <li><img src="/index/images/normal4.jpg" alt="" width="50" height="50"></li>
+            @foreach(explode("|",$v->goods_imgs) as $img)
+            <li><img src="{{$img}}" alt="" width="50" height="50"></li>
+            @endforeach
         </ul>
 
         <div class="goods-title">
-            <a href="products_show.html">荣耀V11现货，特价出手，新人在免200元，赶快来抢购吧,赶快来抢购吧,赶快来抢购吧~~~~~</a>
+            <a href="products_show.html">{{$v->goods_name}}</a>
         </div>
         <div class="goods-label">
             <ul>
@@ -210,10 +210,15 @@
                 <li><a class="procuts-label" title="满100减">满100元减</a></li>
             </ul>
         </div>
-        <span class="goods-money">￥1499.00</span>
-        <span class="goods-shop-name">官方自营店<a href=""><img src="/index/images/icon/kefu.png" width="20" height="20"></a></span>
-        <a href="cart.html" class="add-cart"><img src="/index/images/icon/cart2.png" alt="" width="20" height="20"></a>
+        <span class="goods-money">￥{{$v->goods_price}}</span>
+        @if($v->merchant_id ==0)
+        <span class="goods-shop-name"><a href="">官方自营店<img src="/index/images/icon/kefu.png" width="20" height="20"></a></span>
+        @else
+        <span class="goods-shop-name"><a href="">商家自营店<img src="/index/images/icon/kefu.png" width="20" height="20"></a></span>
+        @endif        
+<a href="cart.html" class="add-cart"><img src="/index/images/icon/cart2.png" alt="" width="20" height="20"></a>
     </li>
+    @endforeach
 </ul>
 
         </div>
