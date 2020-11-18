@@ -59,7 +59,7 @@
                         <td>{{date("Y-m-d H:i:s",$data->add_time)}}</td>
                         <td class="text-center">
                             <a href="/admin/news/upd?id={{$data->n_id}}" class="btn bg-olive btn-xs">修改</a>
-                            @if($data->is_del == 1) <a href="/admin/news/del?id={{$data->n_id}}" class="btn bg-olive btn-xs">隐藏</a> @else <a href="{{url('/admin/news/del/'.$data->n_id)}}" class="btn bg-olive btn-xs">恢复</a> @endif
+                            @if($data->is_del == 1) <a href="/admin/news/del?id={{$data->n_id}}" class="btn bg-olive btn-xs">隐藏</a> @else <a href="/admin/news/del?id={{$data->n_id}}" class="btn bg-olive btn-xs">恢复</a> @endif
                         </td>
                     </tr>
                 @endforeach
