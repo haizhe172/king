@@ -125,7 +125,7 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 		Route::get("indexs","admin\SeckillController@indexs");
 		Route::get("del","admin\SeckillController@destroy");//删除
 		Route::get("edit","admin\SeckillController@edit");//修改视图
-		Route::post("update","admin\SeckillController@update");//执行修改
+		Route::any("update","admin\SeckillController@update");//执行修改
 
 	});
 
@@ -147,7 +147,7 @@ Route::middleware("rolemenu")->prefix('admin')->group(function(){
 		Route::get("create","admin\AdController@create")->name("ad.create");
 		Route::post("store","admin\AdController@store")->name("ad.store");//执行添加
 		Route::get("index","admin\AdController@index")->name("ad.index");//列表页
-		Route::get("del","admin\AdController@destroy")->name("ad.del");//删除
+		Route::get("del/{ad_id?}","admin\AdController@destroy")->name("ad.del");//删除
 		Route::get("edit","admin\AdController@edit")->name("ad.edit");//修改视图
 		Route::post("update","admin\AdController@update")->name("ad.update");//执行修改
 

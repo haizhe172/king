@@ -119,7 +119,7 @@ class AdController extends Controller
         // 转换时间戳int类型  strtotime()内置时间函数
         $post['start_time']=strtotime($post['start_time']);
         $post['end_time']=strtotime($post['end_time']);
-
+        unset($post["id"]);
         if ($request->hasFile('ad_image') && $request->file('ad_image')->isValid()) {
             $photo = $request->file('ad_image');
             $post['ad_image'] = env('UPLOADS_URL').'/'.$photo->store('upload');
@@ -137,15 +137,22 @@ class AdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id=0)
     {
-        // 单删
-        $id = request()->get("id");
-        $res=Ad::where('ad_id',$id)->update(['is_del'=>2]);
+        // dd($id);
+        // 全删
+        $id=request()->id?:$id;  
+        if(!$id){
+            return;
+        }
         if(request()->ajax()){
+            $res=Ad::whereIn('ad_id',$id)->update(['is_del'=>2]);
             return json_encode(['code'=>00000,'msg'=>'删除成功']);
         }
         // dd($res);
+
+        // 单删
+        $res=Ad::where('ad_id',$id)->update(['is_del'=>2]);
         if($res){
             return redirect('admin/ad/index');
         }

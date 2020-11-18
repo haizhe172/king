@@ -103,32 +103,19 @@
                                    <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_height')}}</b> -->
                                 </div>
 
+
                                 <div class="row data-type">
-		                           <div class="col-md-2 title">开始时间</div>
-		                           <div class="col-md-5 data form-group">
-                                        <!--指定 date标记-->
-                                        <div class='input-group date col-sm-9' id='datetimepicker1'>
-                                            <input type="text" class="form-control" name="start_time">
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                   <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_desc')}}</b> -->
+                                <div class="col-md-2 title">开始时间</div>
+                                <div class="col-md-5 data">
+                                    <input  class="form-control" id="meeting" name="start_time" type="datetime-local"/>
+                                </div>
                                 </div>
 
-                                <div class="row data-type" style="height:70px;">
-		                           <div class="col-md-2 title">结束时间</div>
-		                           <div class="col-md-5 data form-group">
-                                        <!--指定 date标记-->
-                                        <div class='input-group date col-sm-9' id='datetimepicker2'>
-                                            <input type="text" class="form-control" name="end_time">
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                   <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_desc')}}</b> -->
+                                <div class="row data-type">
+                                <div class="col-md-2 title">结束时间</div>
+                                <div class="col-md-5 data">
+                                    <input  class="form-control" id="meeting" name="end_time" type="datetime-local"/>
+                                </div>
                                 </div>
 
                                 <div class="row data-type">

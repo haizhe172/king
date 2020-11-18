@@ -7,9 +7,6 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
 
-    <!-- 时间选择 -->
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/admin/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/admin/plugins/adminLTE/css/AdminLTE.css">
@@ -22,11 +19,6 @@
 	<link rel="stylesheet" href="/admin/plugins/kindeditor/themes/default/default.css" />
 	<script charset="utf-8" src="/admin/plugins/kindeditor/kindeditor-min.js"></script>
 	<script charset="utf-8" src="/admin/plugins/kindeditor/lang/zh_CN.js"></script>
-
-    <!-- 时间选择 -->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
 
 
@@ -102,32 +94,19 @@
                                 </div>
 
                                 <div class="row data-type">
-		                           <div class="col-md-2 title">开始时间</div>
-		                           <div class="col-md-5 data form-group">
-                                        <!--指定 date标记-->
-                                        <div class='input-group date col-sm-9' id='datetimepicker1'>
-                                            <input type="text" class="form-control" name="start_time">
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                   <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_desc')}}</b> -->
+                                <div class="col-md-2 title">开始时间</div>
+                                <div class="col-md-5 data">
+                                    <input  class="form-control" id="meeting" name="start_time" type="datetime-local"/>
+                                </div>
                                 </div>
 
-                                <div class="row data-type" style="height:70px;">
-		                           <div class="col-md-2 title">结束时间</div>
-		                           <div class="col-md-5 data form-group">
-                                        <!--指定 date标记-->
-                                        <div class='input-group date col-sm-9' id='datetimepicker2'>
-                                            <input type="text" class="form-control" name="end_time">
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                   <!-- <b style="color:#f00; font-family:'仿宋' ">{{$errors->first('position_desc')}}</b> -->
+                                <div class="row data-type">
+                                <div class="col-md-2 title">结束时间</div>
+                                <div class="col-md-5 data">
+                                    <input  class="form-control" id="meeting" name="end_time" type="datetime-local"/>
                                 </div>
+                                </div>
+
 
                                 <div class="row data-type">
 		                           <div class="col-md-2 title" style="height:70px;">秒杀活动介绍</div>
@@ -139,7 +118,7 @@
 
                                 <div class="row data-type">
 		                           <div class="col-md-2 title">是否开启</div>
-		                           <div class="col-md-10 data">
+		                           <div class="col-md-5 data">
                                        <input type="radio"  name="is_on"  value="1" checked>开启
                                        <input type="radio"  name="is_on"  value="2">关闭
 		                           </div>
@@ -181,18 +160,3 @@
 
 </html>
 <!-- 时间 -->
-
-
-<script type="text/javascript">
-$(function(){
-
-    $('#datetimepicker1').datetimepicker({
-        format: 'YYYY-MM-DD',
-        locale: moment.locale('zh-cn')
-    });
-    $('#datetimepicker2').datetimepicker({
-        format: 'YYYY-MM-DD',
-        locale: moment.locale('zh-cn')
-    });
-});
-</script>
